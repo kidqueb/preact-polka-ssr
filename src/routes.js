@@ -1,13 +1,20 @@
 import { h } from 'preact'
 import Dashboard from './pages/Dashboard'
-import Discover from './pages/Discover'
 
 /**
  * Route tree
  */
 const routes = [
   { path: '/', component: Dashboard },
-  { path: '/discover', component: Discover }
+  { path: '/discover', getComponent: getDiscover}
 ]
+
+/**
+ * Async route functions
+ */
+const getDiscover = () => import(
+  './pages/Discover'
+  /* webpackChunkName: "discover" */
+)
 
 export default routes
