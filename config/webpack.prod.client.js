@@ -8,6 +8,7 @@ module.exports = merge(common, {
   plugins: [
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
+      analyzerMode: 'static',
       defaultSizes: 'gzip'
     })
   ]

@@ -11,14 +11,11 @@ import Route from './components/Route'
 if (typeof window !== 'undefined') {
   const { initialProps, initialState, path } = window.__SSR_DATA__
 
-  /*
-  * Map our `routes` into the <Router /> component.
-  * Only the current route needs `initialProps`
-  */
   const Router = ({ url, initialProps }) => {
     return (
       <PreactRouter url={url}>
         {routes.map(route => {
+          // Only the current route needs `initialProps`
           const props = path === route.path ? { ...route, ...initialProps } : route
           return <Route key={route.path} {...props} />
         })}
@@ -26,10 +23,6 @@ if (typeof window !== 'undefined') {
     )
   }
 
-  /*
-  * In the browser we attach the Router and let that deal
-  * with the displaying of our routes and app state.
-  */
   const App = ({ store, ...props }) => {
     return (
       <Provider store={store}>
@@ -38,14 +31,14 @@ if (typeof window !== 'undefined') {
     )
   }
 
-  const root = document.getElementById('app')
-  const store = createStore(initialState)
-
-  // Remove server rendered js from the dom cause why not..
+  // Remove server rendered js from the document
+  // No clue if this does anything, really..
   delete window.__SSR_DATA__
   const el = document.getElementById('__SSR_DATA__')
   el.parentNode.removeChild(el)
 
   // Render the app.
+  const root = document.getElementById('app')
+  const store = createStore(initialState)
   render(<App store={store} initialProps={initialProps} />, root, root.lastChild)
 }
