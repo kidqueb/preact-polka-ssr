@@ -1,4 +1,4 @@
 # Preact/Polka SSR
 
-## Intentional Tech Debt
-* [ ] Preact Router utils should just be exposed through a fork of the actual `preact-router`
+## Todo
+* [ ] `preact-router` utils should just be exposed through a fork instead of all that duplicate code.

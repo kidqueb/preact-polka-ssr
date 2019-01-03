@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import { Link } from 'preact-router/match'
 
 class Home extends Component {
   static async getInitialProps() {
@@ -9,7 +10,12 @@ class Home extends Component {
 
   render() {
     return (
-      <button onClick={() => console.log('asd')}>{this.props.pageProps}</button>
+      <div>
+        <h1>{this.props.pageProps}</h1>
+
+        <Link href="/">Dashboard</Link>
+        <Link href="/discover">Discover</Link>
+      </div>
     )
   }
 }

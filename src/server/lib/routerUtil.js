@@ -1,3 +1,11 @@
+/**
+ * This module is a copy/paste, with the additon of `getMatchingRoute`,
+ * of preact-router's utils.js file. Needed for matching the current
+ * route on the server.
+ *
+ * [TODO] - Look into forking preact-router once Preact X is released.
+ */
+
 const EMPTY = {};
 
 export function getMatchingRoute(routes, currentRoute) {

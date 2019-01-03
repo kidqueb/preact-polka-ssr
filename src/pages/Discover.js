@@ -1,12 +1,7 @@
 import { h, Component } from 'preact'
+import { Link } from 'preact-router/match'
 
 class Discover extends Component {
-  static async setHead() {
-    return {
-      title: "Discover"
-    }
-  }
-
   static async getInitialProps() {
     return {
       pageProps: 'discover'
@@ -15,7 +10,12 @@ class Discover extends Component {
 
   render() {
     return (
-      <p>{this.props.pageProps}</p>
+      <div>
+        <h1>{this.props.pageProps}</h1>
+
+        <Link href="/">Dashboard</Link>
+        <Link href="/discover">Discover</Link>
+      </div>
     )
   }
 }

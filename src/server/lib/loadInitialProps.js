@@ -1,3 +1,7 @@
+/**
+ * Handles the actual loading of data into our component's `this.props`
+ * by calling it's `getInitialProps` function.
+ */
 export default async function loadInitialProps(route, ctx) {
   const promises = []
   let component = route.component

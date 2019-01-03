@@ -1,11 +1,10 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ManifestPlugin = require('webpack-manifest-plugin')
-const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin
 
 module.exports = {
   entry: {
-    app: './src/client.js'
+    app: './src/app.js'
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -49,10 +48,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].[hash].css",
       chunkFilename: "[id].[hash].css"
-    }),
-    new StatsWriterPlugin({
-      filename: 'client-stats.json',
-      fields: ['chunks', 'publicPath', 'assets'],
-  })
+    })
   ]
 }
