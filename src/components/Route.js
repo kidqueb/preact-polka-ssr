@@ -1,46 +1,33 @@
 /**
- * Completely ripped from "preact-route-async"
- * Added all the hackiness to fake `getInitialProps`
+ * C:  Component
+ * iP: initialProps
  */
 import { h, Component } from 'preact'
 
 class Route extends Component {
-  constructor({ getComponent, component = false }) {
+  constructor({ getComponent, component = null }) {
     super()
-    if (getComponent) this.f(getComponent)
-
-    this.state = {
-      A: component,
-      gotInitialProps: false,
-      initialProps: {}
-    }
+    if (getComponent) this.l(getComponent)
+    this.state = { C: component, iP: {} }
   }
 
   async componentDidMount() {
-    const { A } = this.state
-
-    const initialProps = A && A.getInitialProps
-      ? await A.getInitialProps()
-      : {}
-
-      this.setState({ initialProps })
+    let { C } = this.state
+    let iP = C && C.getInitialProps ? await C.getInitialProps() : {}
+    this.setState({ iP })
   }
 
-  async f(getComponent) {
-    const C = await getComponent()
-    const A = C.default || C
-
-    const initialProps = A.getInitialProps
-      ? await A.getInitialProps()
-      : {}
-
-    this.setState({ A, initialProps })
+  async l(getComponent) {
+    let c = await getComponent()
+    let C = c.default || c
+    let iP = C.getInitialProps ? await C.getInitialProps() : {}
+    this.setState({ C, iP })
   }
 
-  render(props, { A, initialProps }) {
-    const { getComponent } = props
-    if (getComponent && A === false) return null
-    return A ? <A {...initialProps} /> : null
+  render({ getComponent }, { C, iP }) {
+    return (getComponent && !C)
+      ? null
+      : C ? <C {...iP} /> : null
   }
 }
 
