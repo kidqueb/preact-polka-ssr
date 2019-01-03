@@ -28,17 +28,19 @@ server.get('/favicon.ico', (req, res) => res.end()) // hack
  * Register catch-all route. Page rendering is handled by preact-router
  * inside the <Router /> component. `url` is a required prop.
  */
-server.get('*', async (req, res) => {
+server.get('*', (req, res) => {
   const assets = JSON.parse(fs.readFileSync('./dist/manifest.json', 'utf8'))
   const { route, params } = getMatchingRoute(routes, req.url)
 
-  const store = createStore()
-  const data = await loadInitialProps(route, { req, res, params })
+  const promises = []
+  promises.push(loadInitialProps(route, { req, res, params }))
+  promises.push(ensureReady(route))
 
-  // Wait for any async routes to load, then render <App />
-  ensureReady(route).then(Component => {
+  // Wait for loadInitialProps and any async routes to load,
+  // then render <App /> with the data and <Component />
+  Promise.all(promises).then(({ data, Component }) => {
     const App = () => (
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <Component {...data} />
       </Provider>
     )
