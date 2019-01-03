@@ -25,9 +25,9 @@ class Route extends Component {
   }
 
   render({ getComponent }, { C, iP }) {
-    return (getComponent && !C)
-      ? null
-      : C ? <C {...iP} /> : null
+    return C
+      ? <C {...iP} />
+      : null
   }
 }
 
