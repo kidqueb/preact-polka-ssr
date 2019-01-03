@@ -14,7 +14,7 @@ const getDiscover = () => import(
  */
 const routes = [
   { path: '/', component: Dashboard },
-  { path: '/discover', getComponent: getDiscover}
+  { path: '/discover/:id', getComponent: getDiscover}
 ]
 
 export default routes

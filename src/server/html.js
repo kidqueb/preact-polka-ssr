@@ -4,19 +4,22 @@ import devalue from 'devalue'
  * The main document we render our app into.
  * TODO: setup `preact-helmet`
  */
-export default ({ app, assets, initialProps, initialState, path }) => `
+export default ({ app, assets, initialProps, initialState, params, path }) => `
   <html>
   <head>
-    <title>Reach Back</title>
+    <title>Project Title</title>
     <link rel="stylesheet" type="text/css" href=${assets['app.css']} />
   </head>
   <body>
     <div id="app">${app}</div>
 
-    <script id="__SERVER_PASSED__">
-      window.__INITIAL_PROPS__ = ${devalue(initialProps)};
-      window.__STATE__ = ${devalue(initialState)};
-      window.__SERVER_PATH__ = '${path}';
+    <script id="__SSR_DATA__">
+      window.__SSR_DATA__ = ${devalue({
+        initialProps,
+        initialState,
+        params,
+        path
+      })}
     </script>
 
     ${assets['vendor.js'] ? `<script src=${assets['vendor.js']}></script>` : ''}

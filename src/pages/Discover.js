@@ -2,19 +2,19 @@ import { h, Component } from 'preact'
 import { Link } from 'preact-router/match'
 
 class Discover extends Component {
-  static async getInitialProps() {
+  static async getInitialProps({ params }) {
     return {
-      pageProps: 'discover'
+      id: params.id
     }
   }
 
-  render() {
+  render({ id }) {
     return (
       <div>
-        <h1>{this.props.pageProps}</h1>
+        <h1>ID: {id}</h1>
 
         <Link href="/">Dashboard</Link>
-        <Link href="/discover">Discover</Link>
+        <Link href="/discover/1">Discover</Link>
       </div>
     )
   }

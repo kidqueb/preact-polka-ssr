@@ -14,15 +14,13 @@ import loadInitialProps from './lib/loadInitialProps'
 import ensureReady from './lib/ensureReady'
 import renderHTML from './html'
 
-
 /**
- * Create Polka server and register middlewares
+ * Create Polka server and register any middleware
  */
 const server = polka()
-
 server.use(compression())
 server.use(sirv('dist'))
-server.get('/favicon.ico', (req, res) => res.end()) // hack
+server.get('/favicon.ico', (req, res) => res.end()) // hacky
 
 /**
  * Register catch-all route. Page rendering is handled by preact-router
@@ -46,7 +44,7 @@ server.get('*', (req, res) => {
     )
 
     const app = renderToString(<App /> )
-    const html = renderHTML({ app, assets, initialProps, path: route.path })
+    const html = renderHTML({ app, assets, params, initialProps, path: route.path })
     res.end(html)
   })
 })

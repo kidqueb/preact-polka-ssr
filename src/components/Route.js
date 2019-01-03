@@ -3,31 +3,34 @@
  * iP: initialProps
  */
 import { h, Component } from 'preact'
+import { exec } from '../server/lib/routerUtil'
 
 class Route extends Component {
-  constructor({ getComponent, component = null }) {
+  constructor({ getComponent, component = null, path, url }) {
     super()
-    if (getComponent) this.l(getComponent)
-    this.state = { C: component, iP: {} }
+    let params = exec(url, path, true)
+    this.state = { C: component, iP: {}, params }
+    if (getComponent) this.l(getComponent, params)
   }
 
   async componentDidMount() {
-    let { C } = this.state
-    let iP = C && C.getInitialProps ? await C.getInitialProps() : {}
+    if (this.props.getComponent) return
+
+    let { C, params } = this.state
+    let iP = await C.getInitialProps({ params })
     this.setState({ iP })
   }
 
-  async l(getComponent) {
+  async l(getComponent, params) {
     let c = await getComponent()
     let C = c.default || c
-    let iP = C.getInitialProps ? await C.getInitialProps() : {}
+    let iP = await C.getInitialProps({ params })
     this.setState({ C, iP })
   }
 
-  render({ getComponent }, { C, iP }) {
-    return C
-      ? <C {...iP} />
-      : null
+  render(_, { C, iP }) {
+    console.log(iP)
+    return C ? <C {...iP} /> : null
   }
 }
 

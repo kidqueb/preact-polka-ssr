@@ -9,26 +9,19 @@ import routes from './routes'
 import Route from './components/Route'
 
 if (typeof window !== 'undefined') {
-  const SERVER_PATH = window.__SERVER_PATH__
+  const { initialProps, initialState, path } = window.__SSR_DATA__
 
   /*
-  * Map our `routes` into the <Router /> component
+  * Map our `routes` into the <Router /> component.
+  * Only the current route needs `initialProps`
   */
   const Router = ({ url, initialProps }) => {
-
-    // Make sure only the current route is getting the
-    // `initialProps` passed from the server
-    const mappedRoutes = routes.map(route => {
-      const props = SERVER_PATH === route.path
-        ? { ...route, ...initialProps }
-        : route
-
-      return <Route key={route.path} {...props} />
-    })
-
     return (
       <PreactRouter url={url}>
-        {mappedRoutes}
+        {routes.map(route => {
+          const props = path === route.path ? { ...route, ...initialProps } : route
+          return <Route key={route.path} {...props} />
+        })}
       </PreactRouter>
     )
   }
@@ -46,14 +39,11 @@ if (typeof window !== 'undefined') {
   }
 
   const root = document.getElementById('app')
-  const store = createStore(window.__STATE__)
-  const initialProps = window.__INITIAL_PROPS__
+  const store = createStore(initialState)
 
   // Remove server rendered js from the dom cause why not..
-  delete window.__INITIAL_PROPS__
-  delete window.__STATE__
-  delete window.__SERVER_PATH__
-  const el = document.getElementById('__SERVER_PASSED__')
+  delete window.__SSR_DATA__
+  const el = document.getElementById('__SSR_DATA__')
   el.parentNode.removeChild(el)
 
   // Render the app.

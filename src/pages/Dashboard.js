@@ -4,17 +4,17 @@ import { Link } from 'preact-router/match'
 class Home extends Component {
   static async getInitialProps() {
     return {
-      pageProps: 'home'
+      title: 'dashboard'
     }
   }
 
   render() {
     return (
       <div>
-        <h1>{this.props.pageProps}</h1>
+        <h1>{this.props.title}</h1>
 
         <Link href="/">Dashboard</Link>
-        <Link href="/discover">Discover</Link>
+        <Link href="/discover/1">Discover</Link>
       </div>
     )
   }
