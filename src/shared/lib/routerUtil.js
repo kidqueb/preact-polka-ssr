@@ -6,19 +6,19 @@
  * [TODO] - Look into forking preact-router once Preact X is released.
  */
 
-const EMPTY = {}
+const E = {}
 
 export function getMatchingRoute(routes, currentRoute) {
   return routes
     .slice()
     .sort(pathRankSort)
-    .reduce((list, route) => {
+    .reduce((l, route) => {
       let params = route.path ? exec(currentRoute, route.path) : {}
-      return params ? list.concat({ route, params }) : list
+      return params ? l.concat({ route, params }) : l
     }, [])[0]
 }
 
-export function exec(url, route, opts = EMPTY) {
+export function exec(url, route, opts = E) {
   let reg = /(?:\?([^#]*))?(#.*)?$/,
     c = url.match(reg),
     matches = {},
@@ -36,7 +36,7 @@ export function exec(url, route, opts = EMPTY) {
   for (let i = 0; i < max; i++) {
     if (route[i] && route[i].charAt(0) === ':') {
       let param = route[i].replace(/(^\:|[+*?]+$)/g, ''),
-        flags = (route[i].match(/[+*?]+$/) || EMPTY)[0] || '',
+        flags = (route[i].match(/[+*?]+$/) || E)[0] || '',
         plus = ~flags.indexOf('+'),
         star = ~flags.indexOf('*'),
         val = url[i] || ''
@@ -62,7 +62,7 @@ export function exec(url, route, opts = EMPTY) {
 }
 
 export function pathRankSort(a, b) {
-	if (b.default) return Infinity
+	if (!a.path || !b.path) return -1
   let diff = rank(a.path) - rank(b.path)
   return diff || a.path.length - b.path.length
 }

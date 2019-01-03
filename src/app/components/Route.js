@@ -14,9 +14,8 @@ class Route extends Component {
   }
 
   async componentDidMount() {
-    if (this.props.getComponent) return
-
     let { C, params } = this.state
+    if (this.props.getComponent || !C.getInitialProps) return
     let iP = await C.getInitialProps({ params })
     this.setState({ iP })
   }
@@ -24,7 +23,7 @@ class Route extends Component {
   async l(getComponent, params) {
     let c = await getComponent()
     let C = c.default || c
-    let iP = await C.getInitialProps({ params })
+    let iP = C.getInitialProps ? await C.getInitialProps({ params }) : {}
     this.setState({ C, iP })
   }
 
