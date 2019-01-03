@@ -37,16 +37,16 @@ server.get('*', (req, res) => {
   promises.push(ensureReady(route))
 
   // Wait for loadInitialProps and any async routes to load,
-  // then render <App /> with the data and <Component />
-  Promise.all(promises).then(({ data, Component }) => {
+  // then render <App /> with the `initialProps` and <Component />
+  Promise.all(promises).then(({ initialProps, Component }) => {
     const App = () => (
       <Provider store={createStore()}>
-        <Component {...data} />
+        <Component {...initialProps} />
       </Provider>
     )
 
     const app = renderToString(<App /> )
-    const html = renderHTML({ app, assets, data, path: route.path })
+    const html = renderHTML({ app, assets, initialProps, path: route.path })
     res.end(html)
   })
 })

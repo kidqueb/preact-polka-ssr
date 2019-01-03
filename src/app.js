@@ -14,13 +14,13 @@ if (typeof window !== 'undefined') {
   /*
   * Map our `routes` into the <Router /> component
   */
-  const Router = ({ url, data }) => {
+  const Router = ({ url, initialProps }) => {
 
     // Make sure only the current route is getting the
-    // data passed from the server
+    // `initialProps` passed from the server
     const mappedRoutes = routes.map(route => {
       const props = SERVER_PATH === route.path
-        ? { ...route, ...data }
+        ? { ...route, ...initialProps }
         : route
 
       return <Route key={route.path} {...props} />
@@ -47,7 +47,7 @@ if (typeof window !== 'undefined') {
 
   const root = document.getElementById('app')
   const store = createStore(window.__STATE__)
-  const props = window.__INITIAL_PROPS__
+  const initialProps = window.__INITIAL_PROPS__
 
   // Remove server rendered js from the dom cause why not..
   delete window.__INITIAL_PROPS__
@@ -57,5 +57,5 @@ if (typeof window !== 'undefined') {
   el.parentNode.removeChild(el)
 
   // Render the app.
-  render(<App store={store} data={props} />, root, root.lastChild)
+  render(<App store={store} initialProps={initialProps} />, root, root.lastChild)
 }

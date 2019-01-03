@@ -4,7 +4,7 @@ import devalue from 'devalue'
  * The main document we render our app into.
  * TODO: setup `preact-helmet`
  */
-export default ({ app, assets, data, initialState, path }) => `
+export default ({ app, assets, initialProps, initialState, path }) => `
   <html>
   <head>
     <title>Reach Back</title>
@@ -14,7 +14,7 @@ export default ({ app, assets, data, initialState, path }) => `
     <div id="app">${app}</div>
 
     <script id="__SERVER_PASSED__">
-      window.__INITIAL_PROPS__ = ${devalue(data)};
+      window.__INITIAL_PROPS__ = ${devalue(initialProps)};
       window.__STATE__ = ${devalue(initialState)};
       window.__SERVER_PATH__ = '${path}';
     </script>
