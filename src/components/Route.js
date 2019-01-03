@@ -4,23 +4,13 @@
  */
 import { h, Component } from 'preact'
 
-function _objectWithoutProperties(obj, keys) {
-  var target = {}
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue
-    target[i] = obj[i]
-  }
-  return target
-}
-
 class Route extends Component {
-  constructor({ getComponent, component }) {
+  constructor({ getComponent, component = false }) {
     super()
     if (getComponent) this.f(getComponent)
 
     this.state = {
-      A: component || false,
+      A: component,
       gotInitialProps: false,
       initialProps: {}
     }
@@ -36,33 +26,21 @@ class Route extends Component {
       this.setState({ initialProps })
   }
 
-  componentDidUpdate() {
-    if (this.state.A === false && this.props.getComponent)
-      this.f(this.props.getComponent)
-  }
+  async f(getComponent) {
+    const C = await getComponent()
+    const A = C.default || C
 
-  f(getComponent) {
-    getComponent().then(async C => {
-      const component = C.default || C
+    const initialProps = A.getInitialProps
+      ? await A.getInitialProps()
+      : {}
 
-      const initialProps = component.getInitialProps
-        ? await component.getInitialProps()
-        : {}
-
-      this.setState({ A: component, initialProps })
-    })
+    this.setState({ A, initialProps })
   }
 
   render(props, { A, initialProps }) {
     const { getComponent } = props
     if (getComponent && A === false) return null
-
-    const p = _objectWithoutProperties(
-      {...props, ...initialProps},
-      ['getComponent', 'url', 'matches']
-    )
-
-    return A ? <A {...p} /> : null
+    return A ? <A {...initialProps} /> : null
   }
 }
 
