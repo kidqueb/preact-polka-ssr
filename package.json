@@ -8,16 +8,15 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "dev:client": "webpack --watch --progress --hide-modules --config ./config/webpack.dev.client.js",
-    "dev:server": "webpack --watch --progress --hide-modules --config ./config/webpack.dev.server.js",
-    "prod:client": "NODE_ENV=production webpack --progress --hide-modules --config ./config/webpack.prod.client.js",
-    "prod:server": "NODE_ENV=production webpack --progress --hide-modules --config ./config/webpack.prod.server.js",
-    "dev": "npm run clean && npm run dev:server & npm run dev:client",
-    "build": "npm run clean && npm run prod:server && npm run prod:client",
+    "app:dev": "webpack --watch --progress --hide-modules --config ./_config/app/dev.js",
+    "app:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/app/production.js",
+    "server:dev": "webpack --watch --progress --hide-modules --config ./_config/server/dev.js",
+    "server:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/server/production.js",
+    "dev": "npm run clean && npm run server:dev & npm run app:dev",
+    "build": "npm run clean && npm run server:prod && npm run app:prod",
     "start": "npm run build && NODE_ENV=production node ./dist/server.js"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
     "compression": "^1.7.3",
     "devalue": "^1.1.0",
     "polka": "^0.5.1",

@@ -1,11 +1,10 @@
 import { h, render } from 'preact'
-import '@babel/polyfill'
 import PreactRouter from 'preact-router'
 import { Provider } from 'unistore/preact'
 
 import './styles/app.scss'
-import createStore from './store'
-import routes from './routes'
+import routes from '../routes'
+import createStore from '../shared/store'
 import Route from './components/Route'
 
 if (typeof window !== 'undefined') {

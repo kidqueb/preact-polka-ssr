@@ -4,11 +4,11 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: {
-    app: './src/app.js'
+    app: './src/app/index.js'
   },
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../../dist'),
     publicPath: '/'
   },
   module: {

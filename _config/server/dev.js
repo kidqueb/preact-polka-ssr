@@ -1,7 +1,7 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const NodemonPlugin = require('nodemon-webpack-plugin')
-const common = require('./webpack.common.server.js')
+const common = require('./common.js')
 
 module.exports = merge(common, {
   mode: 'development',

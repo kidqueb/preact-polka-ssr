@@ -3,7 +3,7 @@
  * iP: initialProps
  */
 import { h, Component } from 'preact'
-import { exec } from '../server/lib/routerUtil'
+import { exec } from '../../shared/lib/routerUtil'
 
 class Route extends Component {
   constructor({ getComponent, component = null, path, url }) {

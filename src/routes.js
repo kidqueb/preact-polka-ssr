@@ -1,15 +1,15 @@
 import { h } from 'preact'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './app/pages/Dashboard'
 
 /**
  * Async route functions
  */
 const getDiscover = () => import(
-  './pages/Discover'
+  './app/pages/Discover'
   /* webpackChunkName: "discover" */
 )
 const getError = () => import(
-  './pages/Error'
+  './app/pages/Error'
   /* webpackChunkName: "error" */
 )
 
