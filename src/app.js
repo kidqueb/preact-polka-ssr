@@ -15,6 +15,9 @@ if (typeof window !== 'undefined') {
   * Map our `routes` into the <Router /> component
   */
   const Router = ({ url, data }) => {
+
+    // Make sure only the current route is getting the
+    // data passed from the server
     const mappedRoutes = routes.map(route => {
       const props = SERVER_PATH === route.path
         ? { ...route, ...data }
@@ -31,8 +34,8 @@ if (typeof window !== 'undefined') {
   }
 
   /*
-  * In the browser we attach the Router and let that orchestrate
-  * the displaying of our routes and app state.
+  * In the browser we attach the Router and let that deal
+  * with the displaying of our routes and app state.
   */
   const App = ({ store, ...props }) => {
     return (
