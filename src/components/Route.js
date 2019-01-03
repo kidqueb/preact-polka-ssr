@@ -29,7 +29,6 @@ class Route extends Component {
   }
 
   render(_, { C, iP }) {
-    console.log(iP)
     return C ? <C {...iP} /> : null
   }
 }
