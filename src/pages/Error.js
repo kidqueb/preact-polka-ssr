@@ -1,10 +1,10 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router/match'
 
-class Dashboard extends Component {
+class Error extends Component {
   static async getInitialProps() {
     return {
-      title: 'dashboard'
+      title: 'Error'
     }
   }
 
@@ -20,4 +20,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default Error

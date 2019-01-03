@@ -31,7 +31,7 @@ server.get('*', (req, res) => {
   const { route, params } = getMatchingRoute(routes, req.url)
 
   const promises = []
-  promises.push(loadInitialProps(route, { req, res, params }))
+  if (route) promises.push(loadInitialProps(route, { req, res, params }))
   promises.push(ensureReady(route))
 
   // Wait for loadInitialProps and any async routes to load,
