@@ -1,3 +1,7 @@
+/**
+ * Completely ripped from "preact-route-async"
+ * Added all the hackiness to fake `getInitialProps`
+ */
 import { h, Component } from 'preact'
 
 function _objectWithoutProperties(obj, keys) {

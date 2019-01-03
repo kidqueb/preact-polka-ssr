@@ -24,7 +24,6 @@
     "preact": "^8.4.2",
     "preact-helmet": "^4.0.0-alpha-3",
     "preact-render-to-string": "^4.1.0",
-    "preact-route-async": "^0.8.0",
     "preact-router": "^2.6.1",
     "prismjs": "^1.15.0",
     "sirv": "^0.2.2",
