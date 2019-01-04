@@ -10,7 +10,7 @@ import { Provider } from 'unistore/preact'
 import routes from '../routes'
 import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtil'
-import { asyncPrep, HTML } from './util'
+import { asyncPrep, renderDocument } from './util'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -36,7 +36,7 @@ const server = polka()
 
       // Render our app, then the entire document
       const app = renderToString(<App /> )
-      const html = HTML({ app, assets, params, initialProps, path: route.path })
+      const html = renderDocument({ app, assets, params, initialProps, path: route.path })
       res.end(html)
     })
   })
@@ -54,8 +54,8 @@ function runDev() {
 
 function runProd() {
   const options = {
-    key: fs.readFileSync('_config/ssl/local.key'),
-    cert: fs.readFileSync('_config/ssl/local.crt')
+    key: process.env.SSL_KEY_PATH || fs.readFileSync('_config/ssl/local.key'),
+    cert: process.env.SSL_CRT_PATH ||  fs.readFileSync('_config/ssl/local.crt')
   }
 
   spdy.createServer(options, server.handler).listen(3000, () => {

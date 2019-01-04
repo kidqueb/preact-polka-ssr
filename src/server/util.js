@@ -32,7 +32,7 @@ export const asyncPrep = async ({ route, ...ctx }) => {
  * The main document we render our app into.
  * [TODO] - setup `preact-helmet` or something similar
  */
-export const HTML = ({ app, assets, initialProps, initialState, params, path }) => `
+export const renderDocument = ({ app, assets, initialProps, initialState, params, path }) => `
   <html>
   <head>
     <title>Project Title</title>
