@@ -20,7 +20,6 @@ const isDev = process.env.NODE_ENV === 'development'
 const server = polka()
   .use(compression())
   .use(sirv('dist'))
-  .get('/favicon.ico', (req, res) => res.end()) // hacky
   .get('*', (req, res) => {
     const assets = JSON.parse(fs.readFileSync('./dist/manifest.json', 'utf8'))
     const { route, params } = getMatchingRoute(routes, req.url)
