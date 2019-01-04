@@ -1,11 +1,14 @@
 {
-  "name": "ssr",
+  "name": "preact-polka-ssr",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "author": "Nick Quebbeman",
-  "license": "ISC",
+  "description": "A preact app rendered by a polka server with async routes and getInitialProps",
+  "author": "Nick Quebbeman <twitter/@kidqueb>",
+  "license": "MIT",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nmquebb/preact-polka-ssr.git"
+  },
   "scripts": {
     "prepare": "rm -rf dist && mkdir dist && cp -R src/app/assets dist/assets",
     "app:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/app/dev.js",
@@ -53,5 +56,13 @@
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.1.5",
     "workbox-webpack-plugin": "^3.6.3"
-  }
+  },
+  "keywords": [
+    "preact",
+    "react",
+    "polka",
+    "ssr",
+    "webpack",
+    "unistore"
+  ]
 }
