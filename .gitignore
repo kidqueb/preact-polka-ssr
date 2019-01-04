@@ -1,3 +1,4 @@
 node_modules
 dist
-_config/ssl
+_config/ssl/local.crt
+_config/ssl/local.key
