@@ -54,7 +54,7 @@ if (isDev) {
     cert: fs.readFileSync('_config/ssl/local.crt')
   }
 
-  spdy.createServer(options, handler).listen(3000, () => {
+  spdy.createServer(options, server.handler).listen(3000, () => {
     console.log(`Running @ https://localhost:3000`)
   })
 }
