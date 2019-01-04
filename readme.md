@@ -3,6 +3,7 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 
 ## Implemented
 * Isomorphic `preact` app (and it's async routes) served by `polka`.
+* Component's can use a static `getInitialProps` method to retrieve data.
 * Service worker using `workbox-webpack-plugin` (production only).
 
 ## Upcoming Additions
