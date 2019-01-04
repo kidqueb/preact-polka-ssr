@@ -4,20 +4,29 @@ import { exec } from '../../shared/lib/routerUtils'
 class Route extends Component {
   constructor({ getComponent, component = null, path, url }) {
     super()
-    let params = exec(url, path, true)
-    this.state = { RouteComponent: component, initialProps: {}, params }
+    const params = exec(url, path, true)
+
+    this.state = {
+      RouteComponent: component,
+      initialProps: {},
+      params
+    }
+
     if (getComponent) this.l(getComponent, params)
   }
 
   async componentDidMount() {
-    let { RouteComponent, params } = this.state
+    const { RouteComponent, params } = this.state
     if (this.props.getComponent || !RouteComponent.getInitialProps) return
-    this.setState({ initialProps: await RouteComponent.getInitialProps({ params }) })
+
+    this.setState({
+      initialProps: await RouteComponent.getInitialProps({ params })
+    })
   }
 
   async l(getComponent, params) {
-    let component = await getComponent()
-    let RouteComponent = component.default || component
+    const component = await getComponent()
+    const RouteComponent = component.default || component
 
     this.setState({
       RouteComponent,
