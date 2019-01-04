@@ -8,7 +8,7 @@
 
 const E = {}
 
-export function getMatchingRoute(routes, currentRoute) {
+export function getMatchingRoute (routes, currentRoute) {
   return routes
     .slice()
     .sort(pathRankSort)

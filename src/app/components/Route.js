@@ -1,35 +1,34 @@
-/**
- * C:  Component
- * iP: initialProps
- */
 import { h, Component } from 'preact'
-import { exec } from '../../shared/lib/routerUtil'
+import { exec } from '../../shared/lib/routerUtils'
 
 class Route extends Component {
   constructor({ getComponent, component = null, path, url }) {
     super()
     let params = exec(url, path, true)
-    this.state = { C: component, iP: {}, params }
+    this.state = { RouteComponent: component, initialProps: {}, params }
     if (getComponent) this.l(getComponent, params)
   }
 
   async componentDidMount() {
-    let { C, params } = this.state
-    if (this.props.getComponent || !C.getInitialProps) return
-    let iP = await C.getInitialProps({ params })
-    this.setState({ iP })
+    let { RouteComponent, params } = this.state
+    if (this.props.getComponent || !RouteComponent.getInitialProps) return
+    this.setState({ initialProps: await RouteComponent.getInitialProps({ params }) })
   }
 
   async l(getComponent, params) {
-    let c = await getComponent()
-    let C = c.default || c
-    let iP = C.getInitialProps ? await C.getInitialProps({ params }) : {}
-    this.setState({ C, iP })
+    let component = await getComponent()
+    let RouteComponent = component.default || component
+
+    this.setState({
+      RouteComponent,
+      initialProps: RouteComponent.getInitialProps
+        ? await RouteComponent.getInitialProps({ params })
+        : {}
+    })
   }
 
-  render(_, { C, iP }) {
-    return C ? <C {...iP} /> : null
-  }
+  render = (_, { RouteComponent, initialProps }) =>
+    RouteComponent ? <RouteComponent {...initialProps} /> : null
 }
 
 export default Route

@@ -9,8 +9,9 @@ import { Provider } from 'unistore/preact'
 
 import routes from '../routes'
 import createStore from '../shared/store'
-import { getMatchingRoute } from '../shared/lib/routerUtil'
-import { asyncPrep, renderDocument } from './util'
+import { getMatchingRoute } from '../shared/lib/routerUtils'
+import asyncPrep from './lib/asyncPrep'
+import renderDocument from './lib/renderDocument'
 
 const isDev = process.env.NODE_ENV === 'development'
 
