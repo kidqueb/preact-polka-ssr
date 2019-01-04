@@ -7,13 +7,13 @@
   "license": "ISC",
   "sideEffects": false,
   "scripts": {
-    "clean": "rm -rf dist && mkdir dist",
+    "prepare": "rm -rf dist && mkdir dist && cp -R src/app/assets dist/assets",
     "app:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/app/dev.js",
     "app:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/app/production.js",
     "server:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/server/dev.js",
     "server:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/server/production.js",
-    "dev": "npm run clean && npm run server:dev & npm run app:dev",
-    "build": "npm run clean && npm run server:prod && npm run app:prod",
+    "dev": "npm run prepare && npm run server:dev & npm run app:dev",
+    "build": "npm run prepare && npm run server:prod && npm run app:prod",
     "start": "npm run build && NODE_ENV=production node ./dist/server.js"
   },
   "dependencies": {

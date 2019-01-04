@@ -44,11 +44,15 @@ const server = polka()
 /**
  * Start the server
  */
-if (isDev) {
+isDev ? runDev() : runProd()
+
+function runDev() {
   server.listen(3000, () => {
     console.log(`Running @ http://localhost:3000`)
   })
-} else {
+}
+
+function runProd() {
   const options = {
     key: fs.readFileSync('_config/ssl/local.key'),
     cert: fs.readFileSync('_config/ssl/local.crt')
