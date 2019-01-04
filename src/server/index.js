@@ -10,7 +10,7 @@ import { Provider } from 'unistore/preact'
 import routes from '../routes'
 import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtil'
-import { render, HTML } from './util'
+import { asyncPrep, HTML } from './util'
 
 const ssl = {
   key: fs.readFileSync('_config/ssl/local.key'),
@@ -30,7 +30,7 @@ const { handler } = polka()
 
     // Wait for `loadInitialProps` and `ensureReady` to resolve,
     // then render <App /> with the `initialProps` and <Component />
-    render({ req, res, route, params }).then(({ Component, initialProps }) => {
+    asyncPrep({ req, res, route, params }).then(({ Component, initialProps }) => {
       const App = () => (
         <Provider store={createStore()}>
           <Component {...initialProps} />

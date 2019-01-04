@@ -5,7 +5,7 @@ import devalue from 'devalue'
  * Then handle the actual calling of `getInitialProps` if necessary.
  * If the component isn't async, just try calling getInitialProps
  */
-export const render = async ({ route, ...ctx }) => {
+export const asyncPrep = async ({ route, ...ctx }) => {
   const promises = []
   let Component = route.component
 
