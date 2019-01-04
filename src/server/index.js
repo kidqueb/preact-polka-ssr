@@ -1,6 +1,7 @@
 import { h } from 'preact'
 import fs from 'fs'
 import polka from 'polka'
+import spdy from 'spdy'
 import sirv from 'sirv'
 import compression from 'compression'
 import renderToString from 'preact-render-to-string'
@@ -11,41 +12,47 @@ import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtil'
 import { render, HTML } from './util'
 
+const ssl = {
+  key: fs.readFileSync('_config/ssl/local.key'),
+  cert:  fs.readFileSync('_config/ssl/local.crt')
+}
+
 /**
  * Create Polka server and register any middleware
  */
-const server = polka()
-server.use(compression())
-server.use(sirv('dist'))
-server.get('/favicon.ico', (req, res) => res.end()) // hacky
+const { handler } = polka()
+  .use(compression())
+  .use(sirv('dist'))
+  .get('/favicon.ico', (req, res) => res.end()) // hacky
+  .get('*', (req, res) => {
+    const assets = JSON.parse(fs.readFileSync('./dist/manifest.json', 'utf8'))
+    const { route, params } = getMatchingRoute(routes, req.url)
 
-/**
- * Register catch-all route. Page rendering is handled by preact-router
- * inside the <Router /> component. `url` is a required prop.
- */
-server.get('*', (req, res) => {
-  const assets = JSON.parse(fs.readFileSync('./dist/manifest.json', 'utf8'))
-  const { route, params } = getMatchingRoute(routes, req.url)
+    // Wait for `loadInitialProps` and `ensureReady` to resolve,
+    // then render <App /> with the `initialProps` and <Component />
+    render({ req, res, route, params }).then(({ Component, initialProps }) => {
+      const App = () => (
+        <Provider store={createStore()}>
+          <Component {...initialProps} />
+        </Provider>
+      )
 
-  // Wait for `loadInitialProps` and `ensureReady` to resolve,
-  // then render <App /> with the `initialProps` and <Component />
-  render({ req, res, route, params }).then(({ Component, initialProps }) => {
-    const App = () => (
-      <Provider store={createStore()}>
-        <Component {...initialProps} />
-      </Provider>
-    )
-
-    // Render our app, then the entire document
-    const app = renderToString(<App /> )
-    const html = HTML({ app, assets, params, initialProps, path: route.path })
-    res.end(html)
+      // Render our app, then the entire document
+      const app = renderToString(<App /> )
+      const html = HTML({ app, assets, params, initialProps, path: route.path })
+      res.end(html)
+    })
   })
-})
 
 /**
  * Start the server
  */
-server.listen(3000, () => {
-  console.log('Watching @ http://localhost:3000')
+const server = spdy.createServer(ssl, handler)
+server.listen(3000, (error) => {
+  if (error) {
+    console.error(error)
+    return process.exit(1)
+  } else {
+    console.log('Running @ https://localhost:3000')
+  }
 })

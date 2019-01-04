@@ -24,6 +24,7 @@
     "preact-render-to-string": "^4.1.0",
     "preact-router": "^2.6.1",
     "sirv": "^0.2.2",
+    "spdy": "^4.0.0",
     "unistore": "^3.1.0"
   },
   "devDependencies": {

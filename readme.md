@@ -11,3 +11,10 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 
 ## Todo Laters
 * [ ] `preact-router` utils should just be exposed through a fork instead of all that duplicate code.
+
+## Local SSL
+On Chrome you can enable local ssl at [chrome://flags/#allow-insecure-localhost](chrome://flags/#allow-insecure-localhost)
+```
+$ mkdir _config/ssl
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout _config/ssl/local.key -out _config/ssl/local.crt
+```
