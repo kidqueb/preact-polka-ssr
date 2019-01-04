@@ -18,7 +18,7 @@ const ssl = {
 }
 
 /**
- * Create Polka server and register any middleware
+ * Create Polka handler, register middleware & routes
  */
 const { handler } = polka()
   .use(compression())
