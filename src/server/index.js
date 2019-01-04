@@ -12,15 +12,12 @@ import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtil'
 import { asyncPrep, HTML } from './util'
 
-const ssl = {
-  key: fs.readFileSync('_config/ssl/local.key'),
-  cert:  fs.readFileSync('_config/ssl/local.crt')
-}
+const isDev = process.env.NODE_ENV === 'development'
 
 /**
  * Create Polka handler, register middleware & routes
  */
-const { handler } = polka()
+const server = polka()
   .use(compression())
   .use(sirv('dist'))
   .get('/favicon.ico', (req, res) => res.end()) // hacky
@@ -47,12 +44,17 @@ const { handler } = polka()
 /**
  * Start the server
  */
-const server = spdy.createServer(ssl, handler)
-server.listen(3000, (error) => {
-  if (error) {
-    console.error(error)
-    return process.exit(1)
-  } else {
-    console.log('Running @ https://localhost:3000')
+if (isDev) {
+  server.listen(3000, () => {
+    console.log(`Running @ http://localhost:3000`)
+  })
+} else {
+  const options = {
+    key: fs.readFileSync('_config/ssl/local.key'),
+    cert: fs.readFileSync('_config/ssl/local.crt')
   }
-})
+
+  spdy.createServer(options, handler).listen(3000, () => {
+    console.log(`Running @ https://localhost:3000`)
+  })
+}

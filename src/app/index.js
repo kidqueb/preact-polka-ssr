@@ -40,4 +40,13 @@ if (typeof window !== 'undefined') {
   const root = document.getElementById('app')
   const store = createStore(initialState)
   render(<App store={store} initialProps={initialProps} />, root, root.lastChild)
+
+  // Register service worker
+  if ('serviceWorker' in navigator && window.location.protocol === 'https') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(r => { console.log('SW registered: ', r) })
+        .catch(e => { console.log('SW registration failed: ', e) })
+    })
+  }
 }
