@@ -4,16 +4,10 @@ export const foods = {
 }
 
 export const addFood = (s, food) => {
-  return set(s.foods, {
-    list: [...foods.list, food]
-  })
+  return { list: [...s.list, food] }
 }
 
 export const setActiveIndex = (s, activeIndex) => {
-  return set(s.foods, { activeIndex })
-}
-
-// Merge this individual containers state
-function set(last, next) {
-  return { foods: { ...last, ...next } }
+  console.log(s, activeIndex)
+  return { activeIndex }
 }

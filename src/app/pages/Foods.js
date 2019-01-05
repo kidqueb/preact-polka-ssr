@@ -1,6 +1,6 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router/match'
-import { connect } from '../../shared/store'
+import { connect, bindActions } from '../../shared/store'
 
 import { addFood, setActiveIndex } from '../../shared/store/containers/foods'
 
@@ -28,9 +28,7 @@ class Foods extends Component {
   }
 }
 
-const actions = () => ({ addFood, setActiveIndex })
+const actions = () => bindActions('foods', [addFood, setActiveIndex])
 
-const connectedComponent = connect(["foods"], actions)(Foods)
-connectedComponent.getInitialProps = Foods.getInitialProps
 
-export default connectedComponent
+export default connect('foods', actions)(Foods)
