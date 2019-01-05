@@ -22,8 +22,9 @@ export function connect(mapStateToProps, actions) {
 }
 
 /**
- * Because of the way state is structured in containers we bind actions
- * to that specific container so we aren't setting values on the root.
+ * Because of the way state is structured in containers it's a little
+ * easier to bind actions to that specific container's root. This prevents
+ * us from having to `{ ...state.container, newVal }` in every action.
  */
 export function bindActions(key, actions) {
   let a = {}

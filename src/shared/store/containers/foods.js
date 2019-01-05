@@ -7,7 +7,6 @@ export const addFood = (s, food) => {
   return { list: [...s.list, food] }
 }
 
-export const setActiveIndex = (s, activeIndex) => {
-  console.log(s, activeIndex)
+export const setActiveIndex = (_, activeIndex) => {
   return { activeIndex }
 }
