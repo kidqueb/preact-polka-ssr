@@ -1,12 +1,12 @@
 import { h } from 'preact'
-import Dashboard from './app/pages/Dashboard'
+import Foods from './app/pages/Foods'
 
 /**
  * Async route functions
  */
-const getDiscover = () => import(
-  './app/pages/Discover'
-  /* webpackChunkName: "discover" */
+const getSports = () => import(
+  './app/pages/Sports'
+  /* webpackChunkName: "sports" */
 )
 const getError = () => import(
   './app/pages/Error'
@@ -17,8 +17,8 @@ const getError = () => import(
  * Route tree
  */
 const routes = [
-  { path: '/', component: Dashboard },
-  { path: '/discover/:id', getComponent: getDiscover},
+  { path: '/', component: Foods },
+  { path: '/sports/:id', getComponent: getSports},
   { getComponent: getError, default: true }
 ]
 

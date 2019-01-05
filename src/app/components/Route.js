@@ -25,8 +25,8 @@ class Route extends Component {
   }
 
   async l(getComponent, params) {
-    const component = await getComponent()
-    const RouteComponent = component.default || component
+    const c = await getComponent()
+    const RouteComponent = c.default || c
 
     this.setState({
       RouteComponent,

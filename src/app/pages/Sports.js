@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 import { Link } from 'preact-router/match'
 
-class Discover extends Component {
+class Sports extends Component {
   static async getInitialProps({ params }) {
     return {
       id: params.id
@@ -13,11 +13,10 @@ class Discover extends Component {
       <div>
         <h1>ID: {id}</h1>
 
-        <Link href="/">Dashboard</Link>
-        <Link href="/discover/1">Discover</Link>
+        <Link href="/">Foods</Link> | <Link href="/sports/1">Sports</Link>
       </div>
     )
   }
 }
 
-export default Discover
+export default Sports

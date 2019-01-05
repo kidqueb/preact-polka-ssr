@@ -28,15 +28,18 @@ const server = polka()
     // Wait for `loadInitialProps` and `ensureReady` to resolve,
     // then render <App /> with the `initialProps` and <Component />
     asyncPrep({ req, res, route, params }).then(({ Component, initialProps }) => {
+      const store = createStore()
+      const initialState = store.getState()
+
       const App = () => (
-        <Provider store={createStore()}>
+        <Provider store={store}>
           <Component {...initialProps} />
         </Provider>
       )
 
       // Render our app, then the entire document
       const app = renderToString(<App /> )
-      const html = renderDocument({ app, assets, params, initialProps, path: route.path })
+      const html = renderDocument({ app, assets, params, initialProps, initialState, path: route.path })
       res.end(html)
     })
   })
