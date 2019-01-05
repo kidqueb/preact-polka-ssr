@@ -5,9 +5,9 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 * Isomorphic `preact` app (and it's async routes) served by `polka`.
 * Component's can use a static `getInitialProps` method to retrieve data.
 * Service worker using `workbox-webpack-plugin` (production only).
+* Wire up `unistore` (super basic right now, will flesh out more examples soon).
 
 ## Upcoming Additions
-* Wire up `unistore`
 * Manage `<head>` on a per page basis
 * SSR cache
 * Authentication logic
