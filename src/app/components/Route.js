@@ -19,21 +19,30 @@ class Route extends Component {
     const { RouteComponent, params } = this.state
     if (this.props.getComponent || !RouteComponent.getInitialProps) return
 
-    this.setState({
-      initialProps: await RouteComponent.getInitialProps({ params })
-    })
+    const initialProps = await RouteComponent.getInitialProps({ params })
+    this.setState({ initialProps })
+
+    if (RouteComponent && RouteComponent.setHead)
+      RouteComponent.setHead({ initialProps, params }, head => this.setHead(head))
   }
 
   async l(getComponent, params) {
     const c = await getComponent()
     const RouteComponent = c.default || c
+    const initialProps = await RouteComponent.getInitialProps({ params })
 
-    this.setState({
-      RouteComponent,
-      initialProps: RouteComponent.getInitialProps
-        ? await RouteComponent.getInitialProps({ params })
-        : {}
-    })
+    this.setState({ RouteComponent, initialProps })
+
+    if (RouteComponent.setHead)
+      RouteComponent.setHead({ initialProps, params }, head => this.setHead(head))
+  }
+
+  setHead(head) {
+    this.unsetHead = () => console.log('cleanup')
+  }
+
+  componentWillUnmount() {
+    if (this.unsetHead) this.unsetHead()
   }
 
   render = (_, { RouteComponent, initialProps }) =>

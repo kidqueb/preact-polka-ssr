@@ -11,6 +11,10 @@ class Foods extends Component {
     }
   }
 
+  static head = {
+    title: 'asd'
+  }
+
   state = {
     foodVal: ''
   }
