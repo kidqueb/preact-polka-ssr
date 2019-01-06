@@ -5,19 +5,19 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 * Isomorphic `preact` app (and it's async routes) served by `polka`.
 * Component's can use a static `getInitialProps` method to retrieve data.
 * Service worker using `workbox-webpack-plugin` (production only).
-* Wire up `unistore` (super basic right now, will flesh out more examples soon).
+* Wired up `unistore` with scoped state containers.
 
 ## Upcoming Additions
 * Manage `<head>` on a per page basis
 * SSR cache
 * Authentication logic
 * Definitely need to get some tests in
-* Determine if `react-router` is worth the kb
-* CSS (SCSS) modules?
 
 ## Todo Laters
 * [ ] `preact-router` utils should just be exposed through a fork instead of all that duplicate code.
 * [ ] Make a decision on how to handle errors for 404s and whatnot.
+* [ ] Determine if `react-router` is worth the kb
+* [ ] CSS (SCSS) modules?
 
 ## Setting Up Local SSL
 On Chrome you can enable local ssl at [chrome://flags/#allow-insecure-localhost](chrome://flags/#allow-insecure-localhost)

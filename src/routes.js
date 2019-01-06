@@ -7,6 +7,7 @@ import Foods from './app/pages/Foods'
 const getSports = () => import(
   './app/pages/Sports'
   /* webpackChunkName: "sports" */
+  /* webpackPrefetch: true */
 )
 const getError = () => import(
   './app/pages/Error'
