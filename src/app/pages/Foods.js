@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import { Link } from 'preact-router/match'
 import { connect, bindActions } from '../../shared/store'
 
-import { addFood, setActiveIndex } from '../../shared/store/containers/foods'
+import foodActions from '../../shared/store/containers/foods'
 
 class Foods extends Component {
   static async getInitialProps() {
@@ -11,24 +11,52 @@ class Foods extends Component {
     }
   }
 
-  render(props, state) {
-    const { title, foods, ...dispatch } = props
+  state = {
+    foodVal: ''
+  }
+
+  handleAdd = () => {
+    this.props.addFood(this.state.foodVal)
+    this.setState({ foodVal: '' })
+  }
+
+  render(props, { foodVal }) {
+    const { title, list, activeIndex, ...dispatch } = props
 
     return (
       <div>
-        <h1>{title}</h1>
-        <p>list: {foods.list}</p>
-        <p>active: {foods.activeIndex}</p>
-
-        <button onClick={() => dispatch.setActiveIndex(foods.activeIndex + 1)}>Up index</button>
-
         <Link href="/">Foods</Link> | <Link href="/sports/1">Sports</Link>
+
+        <h1>{title}</h1>
+
+        {list && (
+          <ul>
+            {list.map((item, i) => (
+              <li key={item} style={i === activeIndex && { fontWeight: 'bold' }}>
+                <button onClick={() => dispatch.deleteFood(item)}>x</button>
+                {item}
+                <button onClick={() => dispatch.setActiveIndex(i)}>activate</button>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p>activeIndex: {activeIndex}</p>
+
+        <p>
+          <input value={foodVal} onChange={e => { this.setState({ foodVal: e.target.value }) }} />
+          <button onClick={this.handleAdd}>Add food</button>
+        </p>
       </div>
     )
   }
 }
 
-const actions = () => bindActions('foods', [addFood, setActiveIndex])
+const mapState = ({ foods }) => ({
+  list: foods.list,
+  activeIndex: foods.activeIndex
+})
 
+const actions = () =>
+  bindActions('foods', foodActions)
 
-export default connect('foods', actions)(Foods)
+export default connect(mapState, actions)(Foods)

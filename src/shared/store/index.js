@@ -3,9 +3,11 @@ import { connect as uconnect } from 'unistore/preact'
 import devtools from 'unistore/devtools'
 
 import { foods } from './containers/foods'
+import { sports } from './containers/sports'
 
 const initialState = {
-  foods
+  foods,
+  sports
 }
 
 /**
@@ -27,14 +29,14 @@ export function connect(mapStateToProps, actions) {
  * us from having to `{ ...state.container, newVal }` in every action.
  */
 export function bindActions(key, actions) {
-  let a = {}
+  let a = {}, i = 0, l = actions.length
 
-  for (let i = 0; i < actions.length; i++) {
+  for(; i < l; i++) {
     const action = actions[i];
 
     a[action.name] = (state, params) => {
-      const val = action(state, params)
-      return { [key]: { ...state[key], ...val } }
+      const s = state[key]
+      return { [key]: { ...s, ...action(s, params) } }
     }
   }
 
