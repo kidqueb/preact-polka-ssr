@@ -1,7 +1,7 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const shared = require('../shared.js')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ExtractCssChunks = require("extract-css-chunks-webpack-plugin")
 const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = merge(shared, {
@@ -16,7 +16,7 @@ module.exports = merge(shared, {
     rules: [
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [ExtractCssChunks.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
@@ -37,7 +37,7 @@ module.exports = merge(shared, {
   },
   plugins: [
     new ManifestPlugin(),
-    new MiniCssExtractPlugin({
+    new ExtractCssChunks({
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css'
     })

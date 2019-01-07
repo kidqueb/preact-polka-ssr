@@ -1,8 +1,8 @@
 import { h, Component } from 'preact'
-import { Link } from 'preact-router/match'
 import { connect, bindActions } from '../../shared/store'
 
 import foodActions from '../../shared/store/containers/foods'
+import Header from '../components/Header'
 
 class Foods extends Component {
   static async getInitialProps() {
@@ -25,9 +25,7 @@ class Foods extends Component {
 
     return (
       <div>
-        <Link href="/">Foods</Link> | <Link href="/sports/1">Sports</Link>
-
-        <h1>{title}</h1>
+        <Header title={title} />
 
         {list && (
           <ul>
