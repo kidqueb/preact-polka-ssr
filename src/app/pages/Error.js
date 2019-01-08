@@ -7,7 +7,7 @@ class Error extends Component {
       <div>
         <h1>Error</h1>
         <Link href="/">Dashboard</Link>
-        <Link href="/discover/1">Discover</Link>
+        <Link href="/sports/1">Sports</Link>
       </div>
     )
   }
