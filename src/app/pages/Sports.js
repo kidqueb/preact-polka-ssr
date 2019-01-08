@@ -6,17 +6,25 @@ import { addSport, deleteSport, setActiveIndex } from '../../shared/store/contai
 import Header from '../components/Header'
 
 class Sports extends Component {
-  static async getInitialProps({ params }) {
+  static async getInitialProps({ params, store }) {
+    if (store) {
+      const state = store.getState()
+      store.setState({
+        sports:  {
+          ...state.sports,
+          list: [...state.sports.list, 'rugby']
+        }
+      })
+    }
+
     return {
       title: `Sport ${params.id}`
     }
   }
 
-  static setHead({ id }) {
-    return {
-      title: `Sport ${id}`
-    }
-  }
+  static setHead = ({ id }) => ({
+    title: `Sport ${id}`
+  })
 
   state = {
     sportVal: ''
@@ -27,9 +35,7 @@ class Sports extends Component {
     this.setState({ sportVal: '' })
   }
 
-  render(props, { sportVal }) {
-    const { title, list, activeIndex, ...dispatch } = props
-
+  render({ title, list, activeIndex, ...dispatch }, { sportVal }) {
     return (
       <div>
         <Header title={title} />
@@ -45,14 +51,13 @@ class Sports extends Component {
             ))}
           </ul>
         )}
+
         <p>activeIndex: {activeIndex}</p>
 
         <p>
           <input
             value={sportVal}
-            onChange={e => {
-              this.setState({ sportVal: e.target.value })
-            }}
+            onChange={e => { this.setState({ sportVal: e.target.value }) }}
           />
           <button onClick={this.handleAdd}>Add sport</button>
         </p>
@@ -66,9 +71,7 @@ const mapState = ({ sports }) => ({
   activeIndex: sports.activeIndex
 })
 
-const actions = () => bindActions('sports', [addSport, deleteSport, setActiveIndex])
+const actions = () =>
+  bindActions('sports', [addSport, deleteSport, setActiveIndex])
 
-export default connect(
-  mapState,
-  actions
-)(Sports)
+export default connect(mapState, actions)(Sports)

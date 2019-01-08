@@ -24,13 +24,13 @@ const server = polka()
   .get('*', (req, res) => {
     const assets = JSON.parse(fs.readFileSync('./dist/manifest.json', 'utf8'))
     const { route, params } = getMatchingRoute(routes, req.url)
+    const store = createStore()
+    const initialState = store.getState()
 
     // Wait for `loadInitialProps` and `ensureReady` to resolve,
     // then render <App /> with the `initialProps` and <Component />
-    asyncPrep({ req, res, route, params }).then(({ Component, initialProps }) => {
+    asyncPrep({ req, res, route, params, store }).then(({ Component, initialProps }) => {
       const head = Component.setHead !== undefined ? Component.setHead(params) : {}
-      const store = createStore()
-      const initialState = store.getState()
 
       const App = () => (
         <Provider store={store}>
@@ -39,7 +39,7 @@ const server = polka()
       )
 
       // Render our app, then the entire document
-      const app = renderToString(<App /> )
+      const app = renderToString(<App />)
       const html = renderDocument({ app, assets, params, head, initialProps, initialState, path: route.path })
       res.end(html)
     })
@@ -59,7 +59,7 @@ function runDev() {
 function runProd() {
   const options = {
     key: process.env.SSL_KEY_PATH || fs.readFileSync('_config/ssl/local.key'),
-    cert: process.env.SSL_CRT_PATH ||  fs.readFileSync('_config/ssl/local.crt')
+    cert: process.env.SSL_CRT_PATH || fs.readFileSync('_config/ssl/local.crt')
   }
 
   spdy.createServer(options, server.handler).listen(3000, () => {

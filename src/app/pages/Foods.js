@@ -11,11 +11,9 @@ class Foods extends Component {
     }
   }
 
-  static setHead() {
-    return {
-      title: 'Foods'
-    }
-  }
+  static setHead = () => ({
+    title: 'Foods'
+  })
 
   state = {
     foodVal: ''

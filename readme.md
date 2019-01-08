@@ -6,9 +6,9 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 * Component's can use a static `getInitialProps` method to retrieve data.
 * Service worker using `workbox-webpack-plugin` (production only).
 * Wired up `unistore` with scoped state containers.
+* Manage `<head>` on a per page basis with a static `setHead` function.
 
 ## Upcoming Additions
-* Manage `<head>` on a per page basis
 * SSR cache
 * Authentication logic
 * Definitely need to get some tests in

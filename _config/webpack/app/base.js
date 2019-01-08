@@ -4,12 +4,14 @@ const shared = require('../shared.js')
 const ExtractCssChunks = require("extract-css-chunks-webpack-plugin")
 const ManifestPlugin = require('webpack-manifest-plugin')
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 module.exports = merge(shared, {
   entry: {
     app: './src/app/index.js'
   },
   output: {
-    filename: '[name].[contenthash].js',
+    filename: isDev ? '[name].dev.js' : '[name].[contenthash].js',
     publicPath: '/'
   },
   module: {
@@ -38,8 +40,8 @@ module.exports = merge(shared, {
   plugins: [
     new ManifestPlugin(),
     new ExtractCssChunks({
-      filename: '[name].[hash].css',
-      chunkFilename: '[name].[hash].css'
+      filename: isDev ? '[name].dev.css' : '[name].[hash].css',
+      chunkFilename: isDev ? '[name].dev.css' : '[name].[hash].css'
     })
   ]
 })

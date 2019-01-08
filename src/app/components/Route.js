@@ -14,7 +14,8 @@ class Route extends Component {
       params
     }
 
-    if (getComponent) this.l(getComponent, params)
+    if (getComponent)
+      this.l(getComponent, params)
 
     if (component && component.setHead)
       this.unsetHead = setHead(component.setHead(params))
@@ -24,14 +25,16 @@ class Route extends Component {
     const { RouteComponent, params } = this.state
     if (this.props.getComponent || !RouteComponent.getInitialProps) return
 
-    const initialProps = await RouteComponent.getInitialProps({ params })
+    const { store } = this.context
+    const initialProps = await RouteComponent.getInitialProps({ params, store })
     this.setState({ initialProps })
   }
 
   async l(getComponent, params) {
     const c = await getComponent()
     const RouteComponent = c.default || c
-    const initialProps = await RouteComponent.getInitialProps({ params })
+    const { store } = this.context
+    const initialProps = await RouteComponent.getInitialProps({ params, store })
 
     this.setState({ RouteComponent, initialProps })
 
