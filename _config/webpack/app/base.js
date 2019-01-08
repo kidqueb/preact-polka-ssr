@@ -39,7 +39,7 @@ module.exports = merge(shared, {
     new ManifestPlugin(),
     new ExtractCssChunks({
       filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css'
+      chunkFilename: '[name].[hash].css'
     })
   ]
 })
