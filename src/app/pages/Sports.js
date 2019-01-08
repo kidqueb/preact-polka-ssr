@@ -6,17 +6,7 @@ import { addSport, deleteSport, setActiveIndex } from '../../shared/store/contai
 import Header from '../components/Header'
 
 class Sports extends Component {
-  static async getInitialProps({ params, store }) {
-    if (store) {
-      const state = store.getState()
-      store.setState({
-        sports:  {
-          ...state.sports,
-          list: [...state.sports.list, 'rugby']
-        }
-      })
-    }
-
+  static async getInitialProps({ params }) {
     return {
       title: `Sport ${params.id}`
     }
