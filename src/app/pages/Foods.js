@@ -31,7 +31,7 @@ class Foods extends Component {
       <div>
         <Header title={title} />
 
-        {list && (
+        {list.length > 0 && (
           <ul>
             {list.map((item, i) => (
               <li key={item} style={i === activeIndex && { fontWeight: 'bold' }}>
