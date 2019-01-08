@@ -12,7 +12,6 @@ import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtils'
 import asyncPrep from './lib/asyncPrep'
 import renderDocument from './lib/renderDocument'
-import Head from '../app/components/Head'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -28,7 +27,8 @@ const server = polka()
 
     // Wait for `loadInitialProps` and `ensureReady` to resolve,
     // then render <App /> with the `initialProps` and <Component />
-    asyncPrep({ req, res, route, params }).then(({ Component, initialProps, head }) => {
+    asyncPrep({ req, res, route, params }).then(({ Component, initialProps }) => {
+      const head = Component.setHead !== undefined ? Component.setHead(params) : {}
       const store = createStore()
       const initialState = store.getState()
 
@@ -40,7 +40,7 @@ const server = polka()
 
       // Render our app, then the entire document
       const app = renderToString(<App /> )
-      const html = renderDocument({ app, assets, params, initialProps, initialState, path: route.path })
+      const html = renderDocument({ app, assets, params, head, initialProps, initialState, path: route.path })
       res.end(html)
     })
   })

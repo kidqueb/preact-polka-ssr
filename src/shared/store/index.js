@@ -19,6 +19,7 @@ export function connect(mapStateToProps, actions) {
   return C => {
     const c  = uconnect(mapStateToProps, actions)(C)
     if (C.getInitialProps) c.getInitialProps = C.getInitialProps
+    if (C.setHead) c.setHead = C.setHead
     return c
   }
 }

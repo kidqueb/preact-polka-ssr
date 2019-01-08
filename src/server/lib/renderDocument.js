@@ -1,12 +1,13 @@
 import devalue from 'devalue'
+import renderHead from './renderHead'
 
 /*
  * The main document we render our app into.
  * [TODO] - setup `preact-helmet` or something similar
  */
-export default ({ app, assets, initialProps, initialState, params, path, }) => `
+export default ({ app, assets, head, initialProps, initialState, params, path, }) => `
   <html>
-  ${head}
+  ${renderHead({ assets, head })}
   <body>
     <div id="app">${app}</div>
 

@@ -15,7 +15,7 @@ export default async ({ route, ...ctx }) => {
 
   // Once we are sure we have a component, check to see if it
   // has a static `getInitialProps` method we need to run
-  if (Component && Component.getInitialProps !== undefined)
+  if (Component.getInitialProps)
     promises.push(Component.getInitialProps(ctx))
 
   // If we have promises to resolve do it otherwise return

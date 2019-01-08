@@ -5,10 +5,7 @@ export default head => {
   document.title = head.title || 'Default Title'
 
   // Other tags we need to append to the <head>
-  let els = []
-  if (head.tags && head.tags.length) {
-    els = createElements(head.tags)
-  }
+  const els = head.tags && head.tags.length ? createElements(head.tags) : []
 
   // Toss em in the dom
   if (els.length) document.getElementsByTagName('head')[0].appendChild(els.join())

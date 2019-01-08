@@ -1,5 +1,7 @@
 import { h, Component } from 'preact'
+
 import { exec } from '../../shared/lib/routerUtils'
+import setHead from '../lib/setHead'
 
 class Route extends Component {
   constructor({ getComponent, component = null, path, url }) {
@@ -13,6 +15,9 @@ class Route extends Component {
     }
 
     if (getComponent) this.l(getComponent, params)
+
+    if (component && component.setHead)
+      this.unsetHead = setHead(component.setHead(params))
   }
 
   async componentDidMount() {
@@ -21,9 +26,6 @@ class Route extends Component {
 
     const initialProps = await RouteComponent.getInitialProps({ params })
     this.setState({ initialProps })
-
-    if (RouteComponent && RouteComponent.setHead)
-      RouteComponent.setHead({ initialProps, params }, head => this.setHead(head))
   }
 
   async l(getComponent, params) {
@@ -34,11 +36,7 @@ class Route extends Component {
     this.setState({ RouteComponent, initialProps })
 
     if (RouteComponent.setHead)
-      RouteComponent.setHead({ initialProps, params }, head => this.setHead(head))
-  }
-
-  setHead(head) {
-    this.unsetHead = () => console.log('cleanup')
+      this.unsetHead = setHead(RouteComponent.setHead(params))
   }
 
   componentWillUnmount() {

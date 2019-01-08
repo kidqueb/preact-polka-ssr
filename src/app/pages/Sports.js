@@ -12,6 +12,12 @@ class Sports extends Component {
     }
   }
 
+  static setHead({ id }) {
+    return {
+      title: `Sport ${id}`
+    }
+  }
+
   state = {
     sportVal: ''
   }
