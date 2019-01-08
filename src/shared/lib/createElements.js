@@ -1,11 +1,11 @@
 export default tags => tags.map(tag => {
-  const el = createElement(tag.name)
+  let el = document.createElement(tag.name)
 
   if (tag.attrs) {
-    for (const [attr, val] of tag.attrs) {
-      el.setAttribute(attr, val)
+    for (const key in tag.attrs) {
+      el.setAttribute(key, tag.attrs[key])
     }
   }
 
-  els.push(el)
+  return el
 })

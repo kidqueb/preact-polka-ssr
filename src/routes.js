@@ -1,5 +1,5 @@
 import { h } from 'preact'
-import Foods from './app/pages/Foods'
+import Foods from '~/app/pages/Foods'
 
 /**
  * Async route functions

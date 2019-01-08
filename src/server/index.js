@@ -7,7 +7,7 @@ import compression from 'compression'
 import renderToString from 'preact-render-to-string'
 import { Provider } from 'unistore/preact'
 
-import routes from '../routes'
+import routes from '~/routes'
 import createStore from '../shared/store'
 import { getMatchingRoute } from '../shared/lib/routerUtils'
 import asyncPrep from './lib/asyncPrep'
