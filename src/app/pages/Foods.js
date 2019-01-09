@@ -6,6 +6,8 @@ import Header from '../components/Header'
 
 class Foods extends Component {
   static async getInitialProps() {
+    console.log('fooods')
+
     return {
       title: 'Foods'
     }

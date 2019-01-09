@@ -7,6 +7,7 @@ import Header from '../components/Header'
 
 class Sports extends Component {
   static async getInitialProps({ params }) {
+    console.log('spooorts')
     return {
       title: `Sport ${params.id}`
     }

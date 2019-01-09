@@ -8,57 +8,48 @@ class Route extends Component {
     super()
     const params = exec(url, path, true)
 
-    this.state = {
-      RouteComponent: component,
-      initialProps,
-      params
-    }
+    this.state = { RC: component, initialProps, params }
 
-    if (getComponent) this.l(getComponent, params)
-
-    if (component && component.setHead)
-      this.unsetHead = setHead(component.setHead(params))
+    // If we have a `getComponent` method then we have to first load
+    // the async component before we can check for `getInitialProps`
+    if (getComponent) this.l(getComponent)
   }
 
   async componentDidMount() {
-    const { RouteComponent } = this.state
-    if (this.props.getComponent || !RouteComponent.getInitialProps) return
-
-    const initialProps = await this.getInitialProps(RouteComponent)
-    this.setState({ initialProps })
+    if (this.props.getComponent) return
+    this.handleStaticMethods(this.state.RC)
   }
 
-  async l(getComponent, params) {
+  async l(getComponent) {
     const c = await getComponent()
-    const RouteComponent = c.default || c
-    const initialProps = await this.getInitialProps(RouteComponent)
-
-    this.setState({ RouteComponent, initialProps })
-
-    if (RouteComponent.setHead)
-      this.unsetHead = setHead(RouteComponent.setHead(params))
+    const RC = c.default || c
+    this.handleStaticMethods(RC)
   }
 
-  getInitialProps = async C => {
+  handleStaticMethods = async RC => {
     let initialProps = { ...this.state.initialProps }
 
-    if (C.getInitialProps && window.__GET_PROPS__ === true) {
-      initialProps = await C.getInitialProps({
-        params: this.state.params,
-        store: this.context.store
-      })
+    // This flag is set at the end of this function. The first load has data
+    // provided from the server and passes it into our front-end so skip these.
+    if (window.__HAS_NAVIGATED__ === true) {
+      const { params } = this.state
+      const { store } = this.context
+
+      if (RC.getInitialProps)
+        initialProps = await RC.getInitialProps({ params, store })
+
+      if (RC.setHead) this.unsetHead = setHead(RC.setHead(params))
     }
 
-    window.__GET_PROPS__ = true
-    return initialProps
+    if (!window.__HAS_NAVIGATED__) window.__HAS_NAVIGATED__ = true
+    this.setState({ RC, initialProps })
   }
 
   componentWillUnmount() {
     if (this.unsetHead) this.unsetHead()
   }
 
-  render = (_, { RouteComponent, initialProps }) =>
-    RouteComponent ? <RouteComponent {...initialProps} /> : null
+  render = (_, { RC, initialProps }) => (RC ? <RC {...initialProps} /> : null)
 }
 
 export default Route
