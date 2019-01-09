@@ -7,9 +7,9 @@ import routes from '~/routes'
 import createStore from '~/shared/store'
 import Route from 'components/Route'
 
-if (typeof window !== 'undefined') {
+if (typeof window !== undefined) {
   const root = document.getElementById('app')
-  const { initialProps, initialState, path } = window.__SSR_DATA__
+  const { initialProps, initialState, path = '/' } = window.__SSR_DATA__
   const store = createStore(initialState)
 
   const App = () => (
