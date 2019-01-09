@@ -49,6 +49,6 @@ export function bindActions(key, actions) {
  * Also, makes sure we're in the browser since there are no server devtools.
  */
 export default (state = initialState) =>
-  process.env.NODE_ENV === 'development' && typeof window !== 'undefined'
+  process.env.NODE_ENV !== 'production' && typeof window !== 'undefined'
     ? devtools(createStore(state))
     : createStore(state)

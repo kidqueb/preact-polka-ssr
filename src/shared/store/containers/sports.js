@@ -3,16 +3,16 @@ export const sports = {
   activeIndex: 0
 }
 
-export const addSport = ({ list }, sport) => {
+export function addSport({ list }, sport) {
   return { list: [...list, sport] }
 }
 
-export const deleteSport = ({ list }, sport) => {
+export function deleteSport({ list }, sport) {
   list = list.filter(item => item !== sport)
   return { list }
 }
 
-export const setActiveIndex = (_, activeIndex) => {
+export function setActiveIndex(_, activeIndex){
   return { activeIndex }
 }
 

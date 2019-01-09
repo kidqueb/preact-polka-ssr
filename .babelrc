@@ -11,7 +11,7 @@
       "useBuiltIns": "usage",
       "targets": {
         "node": "current",
-        "browsers": ["last 2 versions"]
+        "esmodules": true
       }
     }]
   ],

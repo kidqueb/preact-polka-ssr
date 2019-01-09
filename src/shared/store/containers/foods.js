@@ -3,16 +3,16 @@ export const foods = {
   activeIndex: 0
 }
 
-export const addFood = ({ list }, food) => {
+export function addFood({ list }, food) {
   return { list: [...list, food] }
 }
 
-export const deleteFood = ({ list }, food) => {
+export function deleteFood({ list }, food) {
   list = list.filter(item => item !== food)
   return { list }
 }
 
-export const setActiveIndex = (_, activeIndex) => {
+export function setActiveIndex(_, activeIndex) {
   return { activeIndex }
 }
 

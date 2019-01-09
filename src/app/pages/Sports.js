@@ -65,4 +65,5 @@ const mapState = ({ sports }) => ({
 const actions = () =>
   bindActions('sports', [addSport, deleteSport, setActiveIndex])
 
+
 export default connect(mapState, actions)(Sports)

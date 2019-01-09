@@ -24,7 +24,7 @@ if (typeof window !== undefined) {
     </Provider>
   )
 
-  // Render the app.
+  // Render the app
   render(<App />, root, root.lastChild)
 
   // Register service worker
@@ -36,9 +36,7 @@ if (typeof window !== undefined) {
     })
   }
 
-  // Remove server rendered js from the document
-  // No clue if this does anything, really..
-  delete window.__SSR_DATA__
+  // Clean passed data from the dom, cause gross
   const el = document.getElementById('__SSR_DATA__')
   el.parentNode.removeChild(el)
 }
