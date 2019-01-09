@@ -22,5 +22,8 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 ## Setting Up Local SSL
 On Chrome you can enable local ssl at [chrome://flags/#allow-insecure-localhost](chrome://flags/#allow-insecure-localhost)
 ```
-$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout _config/ssl/local.key -out _config/ssl/local.crt
+$ openssl req -x509 -out ./_config/ssl/local.crt -keyout ./_config/ssl/local.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```

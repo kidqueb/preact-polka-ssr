@@ -5,11 +5,6 @@ const base = require('./base.js')
 module.exports = merge(base, {
   mode: 'production',
   plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1
-    })
-  ],
-  optimization: {
-    minimize: false
-  }
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
+  ]
 });
