@@ -46,10 +46,8 @@ class Sports extends Component {
         <p>activeIndex: {activeIndex}</p>
 
         <p>
-          <input
-            value={sportVal}
-            onChange={e => { this.setState({ sportVal: e.target.value }) }}
-          />
+          <label for="name">Sport name:</label>
+          <input id="name" value={sportVal} onChange={e => { this.setState({ sportVal: e.target.value }) }} />
           <button onClick={this.handleAdd}>Add sport</button>
         </p>
       </div>

@@ -47,7 +47,8 @@ class Foods extends Component {
         <p>activeIndex: {activeIndex}</p>
 
         <p>
-          <input value={foodVal} onChange={e => { this.setState({ foodVal: e.target.value }) }} />
+          <label for="name">Food name:</label>
+          <input id="name" value={foodVal} onChange={e => { this.setState({ foodVal: e.target.value }) }} />
           <button onClick={this.handleAdd}>Add food</button>
         </p>
       </div>

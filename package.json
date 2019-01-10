@@ -10,7 +10,7 @@
     "url": "https://github.com/nmquebb/preact-polka-ssr.git"
   },
   "scripts": {
-    "prepare": "rm -rf dist && mkdir dist && cp -R src/app/assets dist/assets",
+    "prepare": "rm -rf dist && mkdir dist && cp src/app/assets/robots.txt dist/ && cp -R src/app/assets dist/assets",
     "app:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/app/dev.js",
     "app:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/app/production.js",
     "server:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/server/dev.js",

@@ -22,7 +22,11 @@ module.exports = merge(base, {
     new WorkboxPlugin.GenerateSW({
       swDest: 'sw.js',
       clientsClaim: true,
-      skipWaiting: true
+      skipWaiting: true,
+      runtimeCaching: [
+        { urlPattern: /assets/, handler: 'cacheFirst' },
+        { urlPattern: /.*/, handler: 'networkFirst' }
+      ]
     })
   ]
 })

@@ -6,7 +6,8 @@ import renderHead from './renderHead'
  * [TODO] - setup `preact-helmet` or something similar
  */
 export default ({ app, assets, head, initialProps, initialState, params, path, }) => `
-  <html>
+  <!doctype html>
+  <html lang="en">
   ${renderHead({ assets, head })}
   <body>
     <div id="app">${app}</div>
