@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { connect, bindActions } from '../../shared/store'
+import { connect, bindActionScope } from '../../shared/store'
 
 import foodActions from '../../shared/store/containers/foods'
 import Header from '../components/Header'
@@ -61,7 +61,6 @@ const mapState = ({ foods }) => ({
   activeIndex: foods.activeIndex
 })
 
-const actions = () =>
-  bindActions('foods', foodActions)
+const actions = () => bindActionScope('foods', foodActions)
 
 export default connect(mapState, actions)(Foods)

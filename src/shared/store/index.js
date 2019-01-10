@@ -29,7 +29,7 @@ export function connect(mapStateToProps, actions) {
  * easier to bind actions to that specific container's root. This prevents
  * us from having to `{ ...state.container, newVal }` in every action.
  */
-export function bindActions(key, actions) {
+export function bindActionScope(key, actions) {
   let a = {}, i = 0, l = actions.length
 
   for(; i < l; i++) {

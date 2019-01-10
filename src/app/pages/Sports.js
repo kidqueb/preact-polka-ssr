@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { connect, bindActions } from '../../shared/store'
+import { connect, bindActionScope } from '../../shared/store'
 
 import '../styles/other.scss'
 import { addSport, deleteSport, setActiveIndex } from '../../shared/store/containers/sports'
@@ -61,7 +61,7 @@ const mapState = ({ sports }) => ({
 })
 
 const actions = () =>
-  bindActions('sports', [addSport, deleteSport, setActiveIndex])
+  bindActionScope('sports', [addSport, deleteSport, setActiveIndex])
 
 
 export default connect(mapState, actions)(Sports)
