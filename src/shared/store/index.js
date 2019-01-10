@@ -34,7 +34,6 @@ export function bindActionScope(key, actions) {
 
   for(; i < l; i++) {
     const action = actions[i];
-
     a[action.name] = (state, params) => {
       const s = state[key]
       return { [key]: { ...s, ...action(s, params) } }
