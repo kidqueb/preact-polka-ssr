@@ -7,7 +7,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/nmquebb/preact-polka-ssr.git"
+    "url": "https://github.com/kidqueb/preact-polka-ssr.git"
   },
   "scripts": {
     "prepare": "rm -rf dist && mkdir dist && cp src/app/assets/robots.txt dist/ && cp -R src/app/assets dist/assets",
@@ -70,5 +70,13 @@
     "ssr",
     "webpack",
     "unistore"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/nmquebb/preact-polka-ssr/issues"
+  },
+  "homepage": "https://github.com/nmquebb/preact-polka-ssr#readme",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  }
 }
