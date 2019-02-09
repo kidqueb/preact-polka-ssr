@@ -2,6 +2,7 @@
   "extends": "eslint-config-synacor",
   "rules": {
     "indent": "off",
+    "eqeqeq": "off",
     "react/display-name": "off",
     "react/jsx-indent-props": "off",
     "react/jsx-no-bind": "off",
