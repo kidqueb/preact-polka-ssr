@@ -14,7 +14,7 @@ export default (routes, url) => {
   const matched = match(url, parsed);
   const params = exec(url, matched);
 
-  if (matched[0] && matched[0].old) {
+  if (matched && matched[0] && matched[0].old) {
     for (let i = 0; i < routes.length; i++) {
       const r = routes[i];
       if (r.path === matched[0].old) {
