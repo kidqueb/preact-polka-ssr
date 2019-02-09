@@ -199,7 +199,7 @@ class Router extends Component {
     const matched = match(url, parsed);
     const params = exec(url, matched);
 
-    if (matched[0] && matched[0].old) {
+    if (matched && matched[0] && matched[0].old) {
       routes = []; // reuse var cause cool kids do it
       for (let i = 0; i < children.length; i++) {
         const child = children[i];
