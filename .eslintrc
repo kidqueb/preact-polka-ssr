@@ -1,0 +1,11 @@
+{
+  "extends": "eslint-config-synacor",
+  "rules": {
+    "indent": "off",
+    "react/display-name": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-no-bind": "off",
+    "react/jsx-pascal-case": "off",
+    "react/sort-comp": "off"
+  }
+}

@@ -1,11 +1,11 @@
-import devalue from 'devalue'
-import renderHead from './renderHead'
+import devalue from 'devalue';
+import renderHead from './renderHead';
 
 /*
  * The main document we render our app into.
  * [TODO] - setup `preact-helmet` or something similar
  */
-export default ({ app, assets, head, initialProps, initialState, params, path, }) => `
+export default ({ app, assets, head, initialProps, initialState, params, path }) => `
   <!doctype html>
   <html lang="en">
   ${renderHead({ assets, head })}
@@ -20,4 +20,4 @@ export default ({ app, assets, head, initialProps, initialState, params, path, }
     <script src=${assets['app.js']} defer></script>
   </body>
   </html>
-`
+`;

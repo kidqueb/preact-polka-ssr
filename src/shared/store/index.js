@@ -1,14 +1,14 @@
-import createStore from 'unistore'
-import { connect as uconnect } from 'unistore/preact'
-import devtools from 'unistore/devtools'
+import createStore from 'unistore';
+import { connect as uconnect } from 'unistore/preact';
+import devtools from 'unistore/devtools';
 
-import { foods } from './containers/foods'
-import { sports } from './containers/sports'
+import { foods } from './containers/foods';
+import { sports } from './containers/sports';
 
 const initialState = {
   foods,
   sports
-}
+};
 
 /**
  * The standard `connect` from `unistore` wraps components in a function
@@ -17,11 +17,11 @@ const initialState = {
  */
 export function connect(mapStateToProps, actions) {
   return C => {
-    const c  = uconnect(mapStateToProps, actions)(C)
-    if (C.getInitialProps) c.getInitialProps = C.getInitialProps
-    if (C.setHead) c.setHead = C.setHead
-    return c
-  }
+    const c = uconnect(mapStateToProps, actions)(C);
+    if (C.getInitialProps) c.getInitialProps = C.getInitialProps;
+    if (C.setHead) c.setHead = C.setHead;
+    return c;
+  };
 }
 
 /**
@@ -30,17 +30,19 @@ export function connect(mapStateToProps, actions) {
  * us from having to `{ ...state.container, newVal }` in every action.
  */
 export function bindActionScope(key, actions) {
-  let a = {}, i = 0, l = actions.length
+  let a = {},
+    i = 0,
+    l = actions.length;
 
-  for(; i < l; i++) {
+  for (; i < l; i++) {
     const action = actions[i];
     a[action.name] = (state, params) => {
-      const s = state[key]
-      return { [key]: { ...s, ...action(s, params) } }
-    }
+      const s = state[key];
+      return { [key]: { ...s, ...action(s, params) } };
+    };
   }
 
-  return a
+  return a;
 }
 
 /**
@@ -50,4 +52,4 @@ export function bindActionScope(key, actions) {
 export default (state = initialState) =>
   process.env.NODE_ENV !== 'production' && typeof window !== 'undefined'
     ? devtools(createStore(state))
-    : createStore(state)
+    : createStore(state);

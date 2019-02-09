@@ -1,25 +1,27 @@
-import createElements from '../../shared/lib/createElements'
+import createElements from '../../shared/lib/createElements';
 
 export default head => {
   // Set the page title
-  document.title = head.title || 'Default Title'
+  document.title = head.title || 'Default Title';
 
   // Other tags we need to append to the <head>
-  const els = head.tags && head.tags.length ? createElements(head.tags) : []
+  const els = head.tags && head.tags.length ? createElements(head.tags) : [];
 
   // Toss em in the dom
-  if (els.length) document.getElementsByTagName('head')[0].appendChild(els.join())
+  if (els.length) document.getElementsByTagName('head')[0].appendChild(els.join());
 
   // Return a function that removes all the elements we added
-  return () => unsetHead(els)
-}
+  return () => unsetHead(els);
+};
 
 function unsetHead(tags) {
-  let i = 0, l = tags.length, tag
+  let i = 0,
+    l = tags.length,
+    tag;
 
   for (; i < l; i++) {
-    tag = tags[i]
-    tag.parentNode.removeChild(tag)
+    tag = tags[i];
+    tag.parentNode.removeChild(tag);
   }
 }
 

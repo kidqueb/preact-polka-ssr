@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   output: {
@@ -7,20 +7,20 @@ module.exports = {
   resolve: {
     alias: {
       '~': path.join(__dirname, '../../src'),
-      'components': path.join(__dirname, '../../src/app/components'),
-    },
+      components: path.join(__dirname, '../../src/app/components')
+    }
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'babel-loader'
       },
       {
         test: /\.scss$/,
         use: ['css-loader', 'sass-loader']
-      },
+      }
     ]
   }
-}
+};
