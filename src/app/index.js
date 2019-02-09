@@ -5,7 +5,7 @@ import { Provider } from 'unistore/preact';
 import './styles/app.scss';
 import routes from '~/routes';
 import createStore from '~/shared/store';
-import Route from 'components/Route';
+import Route from 'components/Router/Route';
 
 if (typeof window !== undefined) {
   const root = document.getElementById('app');

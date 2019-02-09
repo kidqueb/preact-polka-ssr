@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Link from '../components/Link';
+import Link from 'components/Router/Link';
 
 const Error = () => (
   <div>

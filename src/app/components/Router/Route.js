@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { parse, exec } from 'matchit';
 
-import setHead from '../lib/setHead';
+import setHead from '~/app/lib/setHead';
 
 class Route extends Component {
   constructor({ getComponent, component, path, url, ...initialProps }) {

@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import { subscribers, getCurrentUrl, Link as StaticLink } from './Router';
+import { subscribers, getCurrentUrl, Link as StaticLink } from '.';
 
 class Match extends Component {
   update = url => {

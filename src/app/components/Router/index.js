@@ -103,10 +103,9 @@ function delegateLinkHandler(e) {
       isPreactElement(t)
     ) {
       if (t.hasAttribute('native')) return;
+
       // if link is handled by the router, prevent browser defaults
-      if (routeFromLink(t)) {
-        return prevent(e);
-      }
+      if (routeFromLink(t)) return prevent(e);
     }
   } while ((t = t.parentNode));
 }
@@ -220,14 +219,14 @@ class Router extends Component {
     let current = active[0] || null;
     this._didRoute = !!current;
 
-    let previous = this.previousUrl;
-    if (url !== previous) {
+    if (url !== this.previousUrl) {
       this.previousUrl = url;
+
       if (typeof onChange === 'function') {
         onChange({
           router: this,
           url,
-          previous,
+          previous: this.previousUrl,
           current
         });
       }
@@ -239,14 +238,11 @@ class Router extends Component {
 
 const Link = props => h('a', { onClick: handleLinkClick, ...props });
 
-const Route = props => h(props.component, props);
-
 Router.subscribers = subscribers;
 Router.getCurrentUrl = getCurrentUrl;
 Router.route = route;
 Router.Router = Router;
-Router.Route = Route;
 Router.Link = Link;
 
-export { subscribers, getCurrentUrl, route, Router, Route, Link };
+export { subscribers, getCurrentUrl, route, Router, Link };
 export default Router;
