@@ -8,17 +8,6 @@ Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twi
 * Wired up `unistore` with scoped state containers.
 * Manage `<head>` on a per page basis with a static `setHead` function.
 
-## Upcoming Additions
-* SSR cache
-* Authentication logic
-* Definitely need to get some tests in
-
-## Todo Laters
-* [ ] `preact-router` utils should just be exposed through a fork instead of all that duplicate code.
-* [ ] Make a decision on how to handle errors for 404s and whatnot.
-* [ ] Determine if `react-router` is worth the kb
-* [ ] CSS (SCSS) modules?
-
 ## Setting Up Local SSL
 On Chrome you can enable local ssl at [chrome://flags/#allow-insecure-localhost](chrome://flags/#allow-insecure-localhost)
 ```
