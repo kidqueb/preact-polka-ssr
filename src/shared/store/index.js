@@ -30,9 +30,7 @@ export function connect(mapStateToProps, actions) {
  * us from having to `{ ...state.container, newVal }` in every action.
  */
 export function bindActionScope(key, actions) {
-  let a = {},
-    i = 0,
-    l = actions.length;
+  let a = {}, i = 0, l = actions.length;
 
   for (; i < l; i++) {
     const action = actions[i];

@@ -29,32 +29,31 @@ const server = polka()
 
     // Wait for `loadInitialProps` and `ensureReady` to resolve,
     // then render <App /> with the `initialProps` and <Component />
-    asyncPrep({ req, res, route, params, store }).then(
-      ({ Component, initialProps }) => {
-        const head =
-          Component.setHead !== undefined ? Component.setHead(params) : {};
+    asyncPrep({ req, res, route, params, store }).then(({ Component, initialProps }) => {
+      const head = Component.setHead !== undefined ? Component.setHead(params) : {};
 
-        const App = () => (
-          <Provider store={store}>
-            <Component {...initialProps} />
-          </Provider>
-        );
+      const App = () => (
+        <Provider store={store}>
+          <Component {...initialProps} />
+        </Provider>
+      );
 
-        // Render our app, then the entire document
-        const app = renderToString(<App />);
-        const html = renderDocument({
-          app,
-          assets,
-          params,
-          head,
-          initialProps,
-          initialState,
-          path: route.path
-        });
-        res.end(html);
-      }
-    );
-  });
+      // Render our app, then the entire document
+      const app = renderToString(<App />);
+      const html = renderDocument({
+        app,
+        assets,
+        params,
+        head,
+        initialProps,
+        initialState,
+        path: route.path
+      });
+
+      res.end(html);
+    }
+  );
+});
 
 /**
  * Start the server

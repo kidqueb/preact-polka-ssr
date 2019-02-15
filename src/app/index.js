@@ -17,8 +17,7 @@ if (typeof window !== undefined) {
       <PreactRouter>
         {routes.map(route => {
           // Only the current route needs `initialProps`
-          const props =
-            path === route.path ? { ...route, ...initialProps } : route;
+          const props = path === route.path ? { ...route, ...initialProps } : route;
           return <Route key={route.path} {...props} />;
         })}
       </PreactRouter>

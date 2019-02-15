@@ -15,9 +15,7 @@ export default head => {
 };
 
 function unsetHead(tags) {
-  let i = 0,
-    l = tags.length,
-    tag;
+  let i = 0, l = tags.length, tag;
 
   for (; i < l; i++) {
     tag = tags[i];

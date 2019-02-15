@@ -1,8 +1,7 @@
 import { exec, match, parse } from 'matchit';
 
 export default (routes, url) => {
-  let paths = [],
-    route = null;
+  let paths = [], route = null;
 
   for (let i = 0; i < routes.length; i++) {
     const r = routes[i];

@@ -5,11 +5,15 @@ import Foods from '~/app/pages/Foods';
 /**
  * Async route functions
  */
-const getSports = () => import('./app/pages/Sports');
-/* webpackChunkName: "sports" */
-/* webpackPrefetch: true */
-const getError = () => import('./app/pages/Error');
-/* webpackChunkName: "error" */
+const getSports = () => import(
+  './app/pages/Sports'
+  /* webpackChunkName: "sports" */
+  /* webpackPrefetch: true */
+);
+const getError = () => import(
+  './app/pages/Error'
+  /* webpackChunkName: "error" */
+);
 
 /**
  * Route tree
