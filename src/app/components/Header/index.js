@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Link from 'components/Router/Link';
+import { Link } from '../Router';
 
 import './styles.scss';
 

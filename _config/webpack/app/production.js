@@ -24,8 +24,8 @@ module.exports = merge(base, {
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [
-        { urlPattern: /assets/, handler: 'cacheFirst' },
-        { urlPattern: /.*/, handler: 'networkFirst' }
+        { urlPattern: /assets/, handler: 'CacheFirst' },
+        { urlPattern: /.*/, handler: 'NetworkFirst' }
       ]
     })
   ]

@@ -5,14 +5,14 @@ import foodActions from '../../shared/store/containers/foods';
 import Header from '../components/Header';
 
 class Foods extends Component {
-  static async getInitialProps() {
+  static async getInitialProps({ params }) {
     return {
-      title: 'Foods'
+      title: `foods ${params.id}`
     };
   }
 
-  static setHead = () => ({
-    title: 'Foods'
+  static setHead = ({ id }) => ({
+    title: `foods ${id}`
   });
 
   state = {
@@ -26,6 +26,7 @@ class Foods extends Component {
 
   render(props, { foodVal }) {
     const { title, list, activeIndex, ...dispatch } = props;
+    console.log(this.props)
 
     return (
       <div>
@@ -36,7 +37,7 @@ class Foods extends Component {
             {list.map((item, i) => (
               <li
                 key={item}
-                style={i === activeIndex && { fontWeight: 'bold' }}
+                style={{ fontWeight: i === activeIndex ? 'bold' : 'normal' }}
               >
                 <button onClick={() => dispatch.deleteFood(item)}>x</button>
                 {item}

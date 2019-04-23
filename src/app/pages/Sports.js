@@ -30,6 +30,7 @@ class Sports extends Component {
   };
 
   render({ title, list, activeIndex, ...dispatch }, { sportVal }) {
+
     return (
       <div>
         <Header title={title} />
@@ -39,7 +40,7 @@ class Sports extends Component {
             {list.map((item, i) => (
               <li
                 key={item}
-                style={i === activeIndex && { fontWeight: 'bold' }}
+                style={{ fontWeight: i === activeIndex ? 'bold' : 'normal' }}
               >
                 <button onClick={() => dispatch.deleteSport(item)}>x</button>
                 {item}

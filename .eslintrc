@@ -1,5 +1,4 @@
 {
-  "extends": "eslint-config-synacor",
   "rules": {
     "indent": "off",
     "eqeqeq": "off",

@@ -1,20 +1,21 @@
 import { h, Component } from 'preact';
 import { parse, exec } from 'matchit';
 
-import setHead from '~/app/lib/setHead';
-
 class Route extends Component {
   constructor({ getComponent, component, path, url, ...initialProps }) {
     super();
-    const params = exec(url, parse(path));
-    this.state = { RC: component, initialProps, params };
+    this.state = {
+      RC: component,
+      params: exec(url, parse(path)),
+      initialProps
+    };
 
     // If we have a `getComponent` method then we have to first load
     // the async component before we can check for `getInitialProps`
     if (getComponent) this.l(getComponent);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (this.props.getComponent) return;
     this.handleStaticMethods(this.state.RC);
   }
@@ -26,7 +27,7 @@ class Route extends Component {
   }
 
   handleStaticMethods = async RC => {
-    let initialProps = { ...this.state.initialProps };
+    let { initialProps } = this.state;
 
     // This flag is set at the end of this function. The first load has data
     // provided from the server and passes it into our front-end so skip these.
@@ -34,21 +35,16 @@ class Route extends Component {
       const { params } = this.state;
       const { store } = this.context;
 
-      if (RC.getInitialProps)
+      if (RC.getInitialProps) {
         initialProps = await RC.getInitialProps({ params, store });
-
-      if (RC.setHead) this.unsetHead = setHead(RC.setHead(params));
+      }
     }
 
     if (!window.__HAS_NAVIGATED__) window.__HAS_NAVIGATED__ = true;
     this.setState({ RC, initialProps });
   };
 
-  componentWillUnmount() {
-    if (this.unsetHead) this.unsetHead();
-  }
-
-  render = (_, { RC, initialProps }) => (RC ? <RC {...initialProps} /> : null);
+  render = (_props, { RC, initialProps }) => (RC ? <RC {...initialProps} /> : null);
 }
 
 export default Route;

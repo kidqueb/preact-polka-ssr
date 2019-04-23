@@ -1,9 +1,13 @@
 const path = require('path');
+const WebpackModules = require('webpack-modules');
 
 module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist')
   },
+  plugins: [
+    new WebpackModules()
+  ],
   resolve: {
     alias: {
       '~': path.join(__dirname, '../../src'),

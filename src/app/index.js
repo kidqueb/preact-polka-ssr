@@ -1,31 +1,29 @@
-import { h, render } from 'preact';
-import PreactRouter from './components/Router';
+import { h, hydrate } from 'preact';
 import { Provider } from 'unistore/preact';
 
 import './styles/app.scss';
 import routes from '~/routes';
 import createStore from '~/shared/store';
-import Route from 'components/Router/Route';
+import { Router, Route } from './components/Router';
 
 if (typeof window !== undefined) {
-  const root = document.getElementById('app');
   const { initialProps, initialState, path = '/' } = window.__SSR_DATA__;
   const store = createStore(initialState);
 
   const App = () => (
     <Provider store={store}>
-      <PreactRouter>
+      <Router>
         {routes.map(route => {
           // Only the current route needs `initialProps`
           const props = path === route.path ? { ...route, ...initialProps } : route;
           return <Route key={route.path} {...props} />;
         })}
-      </PreactRouter>
+      </Router>
     </Provider>
   );
 
-  // Render the app
-  render(<App />, root, root.lastChild);
+  // Hydrate the app
+  hydrate(<App />, document.getElementById('app'));
 
   // Register service worker
   if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
