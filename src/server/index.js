@@ -67,12 +67,7 @@ function runDev() {
 }
 
 function runProd() {
-  const options = {
-    key: process.env.SSL_KEY_PATH || fs.readFileSync('_config/ssl/local.key'),
-    cert: process.env.SSL_CRT_PATH || fs.readFileSync('_config/ssl/local.crt')
-  };
-
-  spdy.createServer(options, server.handler).listen(3000, () => {
-    console.log(`Running @ https://localhost:3000`);
+  server.listen(3000, () => {
+    console.log(`Running @ http://localhost:3000`);
   });
 }
