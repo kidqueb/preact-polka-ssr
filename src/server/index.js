@@ -1,14 +1,15 @@
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 import fs from 'fs';
 import polka from 'polka';
 import sirv from 'sirv';
 import compression from 'compression';
-import renderToString from 'preact-render-to-string';
 import { Router } from "wouter-preact"
 import useStaticLocation from "wouter-preact/static-location"
+import renderToString from 'preact-render-to-string';
 
 import asyncPrep from './lib/asyncPrep';
 import renderDocument from './lib/renderDocument';
+import Header from "../app/components/Header/index"
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -30,7 +31,10 @@ const server = polka()
 
       const App = () => (
         <Router hook={useStaticLocation(req.url)}>
-          <CurrentRoute {...initialProps} />
+          <div id="app">
+            <Header />
+            <CurrentRoute {...initialProps} />
+          </div>
         </Router>
       );
 

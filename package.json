@@ -5,6 +5,11 @@
   "author": "Nick Quebbeman <twitter/@kidqueb>",
   "license": "MIT",
   "sideEffects": false,
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not dead"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kidqueb/preact-polka-ssr.git"
@@ -19,7 +24,7 @@
     "test": "jest --coverage --config _config/jest.config.js --no-cache",
     "dev": "npm-run-all prepare --parallel server:dev app:dev",
     "build": "npm-run-all prepare server:prod app:prod",
-    "start": "node ./dist/server.js",
+    "start": "yarn build && NODE_ENV=production node ./dist/server.js",
     "lint": "eslint src/app"
   },
   "dependencies": {
@@ -33,15 +38,15 @@
     "wouter-preact": "^2.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
     "@babel/plugin-transform-react-constant-elements": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "babel-core": "^7.0.0-bridge.0",
+    "@babel/preset-env": "^7.7.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
@@ -50,6 +55,7 @@
     "eslint": "^5.12.1",
     "eslint-config-synacor": "^3.0.3",
     "extract-css-chunks-webpack-plugin": "^4.3.2",
+    "fast-async": "^6.3.8",
     "file-loader": "^3.0.1",
     "jest": "^24.7.1",
     "node-sass": "^4.11.0",

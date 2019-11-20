@@ -3,14 +3,14 @@ import { useRoute } from "wouter-preact";
 
 import useInitialProps from "../lib/useInitialProps";
 
-export default route => {
-  const useRouteMatch = useRoute(route.path);
-  const [Component, initialProps] = useInitialProps(route);
+export default ({ path, match, component, getComponent }) => {
+  const useRouteMatch = useRoute(path);
+  const [Component, initialProps] = useInitialProps({ component, getComponent });
 
-	// `route.match` is present - Route is controlled by the Switch
-	const [matches, params] = route.match || useRouteMatch;
+	// `match` is present - Route is controlled by the Switch
+	const [matches, params] = match || useRouteMatch;
 
 	if (!matches) return null;
 
-	return Component ? <Component {...initialProps} /> : null;
+	return Component ? <Component {...({ params, ...initialProps })} /> : null;
 };

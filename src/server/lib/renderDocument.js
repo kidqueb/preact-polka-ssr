@@ -10,16 +10,15 @@ export default ({ app, assets, initialProps, initialState, params, path }) => `
   <html lang="en">
   ${renderHead({ assets })}
   <body>
-    <div id="app">
-      ${app}
-    </div>
+    ${app}
 
     <script id="__SSR_DATA__">
       window.__SSR_DATA__ = ${devalue({ initialProps, initialState, params, path })}
     </script>
 
-    <script src=${assets['vendor.js']}></script>
+    ${assets['vendor.js'] && `<script src=${assets['vendor.js']} defer></script>`}
     <script src=${assets['app.js']} defer></script>
   </body>
   </html>
 `;
+// <script src=${assets['vendor.js']}></script>

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "preact/hooks";
 
-export default route => {
+export default ({ component, getComponent }) => {
 	const [{ routeComponent, initialProps }, setRouteData] = useState({});
 
 	useEffect(async () => {
 		let c,
 			iP = {};
 
-		if (route.component) c = route.component;
-		else if (route.getComponent) {
-			const m = await route.getComponent();
+		if (component) c = component;
+		else if (getComponent) {
+			const m = await getComponent();
 			c = m.default || m;
 		}
 

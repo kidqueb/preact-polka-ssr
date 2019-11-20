@@ -12,6 +12,7 @@ const getSports = () =>
 	import(
 		"./app/pages/Sports"
 		/* webpackChunkName: "sports" */
+		/* webpackPrefetch: true */
 	);
 const getError = () =>
 	import(
