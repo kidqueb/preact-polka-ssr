@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { Link } from '../components/Router';
+import { Link } from 'wouter-preact';
 
 const Error = () => (
   <div>

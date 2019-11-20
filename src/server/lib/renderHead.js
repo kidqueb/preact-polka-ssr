@@ -1,9 +1,9 @@
 import { h } from 'preact';
 
-export default ({ head, assets }) => `
+export default ({ assets }) => `
   <head>
     <meta charset="UTF-8">
-    <title>${head.title || 'Default Title'}</title>
+    <title>${'Default Title'}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A preact app with ssr served by polka.">
     <meta name="theme-color" content="#333"/>

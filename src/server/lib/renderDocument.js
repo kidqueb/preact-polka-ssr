@@ -5,12 +5,14 @@ import renderHead from './renderHead';
  * The main document we render our app into.
  * [TODO] - setup `preact-helmet` or something similar
  */
-export default ({ app, assets, head, initialProps, initialState, params, path }) => `
+export default ({ app, assets, initialProps, initialState, params, path }) => `
   <!doctype html>
   <html lang="en">
-  ${renderHead({ assets, head })}
+  ${renderHead({ assets })}
   <body>
-    <div id="app">${app}</div>
+    <div id="app">
+      ${app}
+    </div>
 
     <script id="__SSR_DATA__">
       window.__SSR_DATA__ = ${devalue({ initialProps, initialState, params, path })}

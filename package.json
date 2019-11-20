@@ -17,20 +17,20 @@
     "server:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/server/production.js",
     "test:watch": "jest --watch --coverage --config _config/jest.config.js",
     "test": "jest --coverage --config _config/jest.config.js --no-cache",
-    "dev": "npm run prepare && npm run server:dev & npm run app:dev",
-    "build": "npm run prepare && npm run server:prod && npm run app:prod",
-    "start": "NODE_ENV=production node ./dist/server.js",
+    "dev": "npm-run-all prepare --parallel server:dev app:dev",
+    "build": "npm-run-all prepare server:prod app:prod",
+    "start": "node ./dist/server.js",
     "lint": "eslint src/app"
   },
   "dependencies": {
     "compression": "^1.7.3",
     "devalue": "^1.1.0",
-    "polka": "^0.5.1",
+    "polka": "^1.0.0-next.7",
     "preact": "^10.0.0-beta.0",
     "preact-render-to-string": "^5.0.2",
     "sirv": "^0.3.1",
     "spdy": "^4.0.0",
-    "unistore": "^3.1.0"
+    "wouter-preact": "^2.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -54,6 +54,7 @@
     "jest": "^24.7.1",
     "node-sass": "^4.11.0",
     "nodemon-webpack-plugin": "^4.0.7",
+    "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

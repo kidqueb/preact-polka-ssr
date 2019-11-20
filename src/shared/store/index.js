@@ -1,5 +1,4 @@
 import createStore from 'unistore';
-import { connect as uconnect } from 'unistore/preact';
 import devtools from 'unistore/devtools';
 
 import { foods } from './containers/foods';
