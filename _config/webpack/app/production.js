@@ -7,6 +7,19 @@ const base = require("./base.js");
 module.exports = merge(base, {
 	mode: "production",
 	optimization: {
+		splitChunks: {
+      cacheGroups: {
+        // Create a separate chunk for preact to apply slightly different
+        // Uglify options on it.
+        preact: {
+          name: 'vendor',
+          chunks: 'all',
+          minSize: 0,
+          test: /[\\/]node_modules[\\/]/,
+          priority: 99,
+        },
+      },
+    },
 		minimizer: [new TerserPlugin()]
 	},
 	plugins: [

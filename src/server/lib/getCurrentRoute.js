@@ -1,7 +1,6 @@
 import makeMatcher from "wouter-preact/matcher";
 
 import routes from "../../routes";
-
 const matcher = makeMatcher();
 
 export default async req => {
@@ -15,7 +14,8 @@ export default async req => {
 
 		// Break if its not the current route
     if (!matches) continue;
-    
+		
+		// Set our route params since we know we have a match
     routeParams = params;
 
 		// Break if we set a component

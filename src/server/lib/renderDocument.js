@@ -16,7 +16,7 @@ export default ({ app, assets, initialProps, initialState, params, path }) => `
       window.__SSR_DATA__ = ${devalue({ initialProps, initialState, params, path })}
     </script>
 
-    ${assets['vendor.js'] && `<script src=${assets['vendor.js']} defer></script>`}
+    ${assets['vendor.js'] ? `<script src=${assets['vendor.js']} defer></script>` : ''}
     <script src=${assets['app.js']} defer></script>
   </body>
   </html>
