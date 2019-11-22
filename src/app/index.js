@@ -1,10 +1,9 @@
 import { h, hydrate } from "preact";
 import { Switch } from "wouter-preact";
-import useLocation from "wouter-preact/use-location";
+import useLocation from "wouter-preact/use-location"
 
 import "./styles/app.scss";
 import App from "./components/App";
-
 import routes from "../routes";
 import Route from "./components/Route";
 

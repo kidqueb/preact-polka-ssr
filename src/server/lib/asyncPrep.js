@@ -13,7 +13,8 @@ export default async req => {
 
   // Once we are sure we have a component, check to see if it
   // has a static `getInitialProps` method we need to run
-  if (CurrentRoute.getInitialProps) promises.push(CurrentRoute.getInitialProps(params));
+  if (CurrentRoute.getInitialProps) 
+    promises.push(CurrentRoute.getInitialProps(params));
 
   // If we have promises to resolve do it otherwise return
   // an empty object as our initial props

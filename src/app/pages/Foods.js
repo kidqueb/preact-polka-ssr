@@ -16,7 +16,6 @@ const Foods = ({ title }) => {
 }
 
 Foods.getInitialProps = async params => {
-  console.log(params)
   return ({ title: "LETS GO FOOD" })
 }
 

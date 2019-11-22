@@ -30,7 +30,7 @@ const server = polka()
 
 				const AppWithCurrentRoute = () => (
 					<App hook={useStaticLocation(req.url)}>
-						<CurrentRoute {...initialProps} />
+						<CurrentRoute {...({req, params, ...initialProps})} />
 					</App>
 				);
 

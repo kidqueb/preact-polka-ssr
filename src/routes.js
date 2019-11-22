@@ -25,7 +25,7 @@ const getError = () =>
  */
 const routes = [
 	{ path: "/", getComponent: getFoods },
-	{ path: "/sports/:id", getComponent: getSports },
+	{ path: "/sports/:id/:segment?", getComponent: getSports },
 	{ path: "/:error*", getComponent: getError }
 ];
 
