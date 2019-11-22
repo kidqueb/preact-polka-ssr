@@ -1,7 +1,7 @@
 import { h, Fragment, toChildArray } from "preact";
 import { useRouter, useLocation } from "wouter-preact";
 
-import getRouterHook from "../../shared/lib/getRouterHook";
+import getRouterHook from "../../lib/getRouterHook";
 
 export default ({ req, base, children }) => {
 	const hook = getRouterHook(req);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
 
-export default ({ component, getComponent }) => {
+export default ({ params, store, component, getComponent }) => {
 	const [{ routeComponent, initialProps }, setRouteData] = useState({});
 
 	useEffect(async () => {
@@ -13,7 +13,7 @@ export default ({ component, getComponent }) => {
 			c = m.default || m;
 		}
 
-		if (c.getInitialProps) iP = await c.getInitialProps();
+		if (c.getInitialProps) iP = await c.getInitialProps({ params, store });
 
 		setRouteData({ routeComponent: c, initialProps: iP });
 

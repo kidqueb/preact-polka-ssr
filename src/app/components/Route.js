@@ -3,7 +3,7 @@ import { useRoute } from "wouter-preact";
 
 import useInitialProps from "../lib/useInitialProps";
 
-export default ({ path, match, ...props }) => {
+export default ({ path, match, store, ...props }) => {
 	const useRouteMatch = useRoute(path);
 
 	// `match` is an array from Switch and NestedRouter
@@ -11,7 +11,7 @@ export default ({ path, match, ...props }) => {
 
 	if (!matches) return null;
 
-	const [Component, initialProps] = useInitialProps(props);
+	const [Component, initialProps] = useInitialProps({ ...props, params, store });
 
 	return Component 
 		? <Component {...({ path, params, ...initialProps })} /> 

@@ -6,6 +6,7 @@ import compression from "compression";
 import useStaticLocation from "wouter-preact/static-location";
 import renderToString from "preact-render-to-string";
 
+import createStore from "../store"
 import asyncPrep from "./lib/asyncPrep";
 import renderDocument from "./lib/renderDocument";
 import App from "../app/components/App";
@@ -19,17 +20,18 @@ const server = polka()
 	.use(compression())
 	.use(sirv("dist"))
 	.get("*", (req, res, next) => {
+		const store = createStore()
 		const assets = JSON.parse(fs.readFileSync("./dist/manifest.json", "utf8"));
 
 		// Wait for `loadInitialProps` and `ensureReady` to resolve,
 		// then render <App /> with the `initialProps` and <Component />
-		asyncPrep(req)
+		asyncPrep(req, store)
 			.then(asyncPayload => {
 				if (!asyncPayload) return next();
 				const { CurrentRoute, params, initialProps } = asyncPayload;
 
 				const AppWithCurrentRoute = () => (
-					<App hook={useStaticLocation(req.url)}>
+					<App hook={useStaticLocation(req.url)} store={store}>
 						<CurrentRoute {...({req, params, ...initialProps})} />
 					</App>
 				);

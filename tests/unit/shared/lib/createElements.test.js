@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import createElements from '~/shared/lib/createElements'
+import createElements from '~/lib/createElements'
 
 describe('shared/lib/createElements', () => {
   it('should return an empty array if no tags are included', () => {
