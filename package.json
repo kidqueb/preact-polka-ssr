@@ -15,17 +15,17 @@
     "url": "https://github.com/kidqueb/preact-polka-ssr.git"
   },
   "scripts": {
-    "prepare": "rm -rf dist && mkdir dist && cp src/app/assets/robots.txt dist/ && cp -R src/app/assets dist/assets",
-    "app:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/app/dev.js",
-    "app:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/app/production.js",
+    "prepare": "rm -rf dist && mkdir dist && cp src/client/assets/robots.txt dist/ && cp -R src/client/assets dist/assets",
+    "client:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/client/dev.js",
+    "client:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/client/production.js",
     "server:dev": "webpack --watch --progress --hide-modules --config ./_config/webpack/server/dev.js",
     "server:prod": "NODE_ENV=production webpack --progress --hide-modules --config ./_config/webpack/server/production.js",
     "test:watch": "jest --watch --coverage --config _config/jest.config.js",
     "test": "jest --coverage --config _config/jest.config.js --no-cache",
-    "dev": "npm-run-all prepare --parallel server:dev app:dev",
-    "build": "npm-run-all prepare server:prod app:prod",
+    "dev": "npm-run-all prepare --parallel server:dev client:dev",
+    "build": "npm-run-all prepare server:prod client:prod",
     "start": "yarn build && NODE_ENV=production node ./dist/server.js",
-    "lint": "eslint src/app"
+    "lint": "eslint src/client"
   },
   "dependencies": {
     "compression": "^1.7.3",

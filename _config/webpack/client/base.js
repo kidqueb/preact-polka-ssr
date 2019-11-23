@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 module.exports = merge(shared, {
   entry: {
-    app: './src/app/index.js'
+    client: './src/client/index.js'
   },
   output: {
     filename: isDev ? '[name].dev.js' : '[name].[contenthash].js',

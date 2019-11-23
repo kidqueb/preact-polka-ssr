@@ -5,18 +5,18 @@
  */
 const getFoods = () =>
 	import(
-		"./app/pages/Foods"
+		"./client/pages/Foods"
 		/* webpackChunkName: "foods" */
 	);
 const getSports = () =>
 	import(
-		"./app/pages/Sports"
+		"./client/pages/Sports"
 		/* webpackChunkName: "sports" */
 		/* webpackPrefetch: true */
 	);
 const getError = () =>
 	import(
-		"./app/pages/Error"
+		"./client/pages/Error"
 		/* webpackChunkName: "error" */
 	);
 

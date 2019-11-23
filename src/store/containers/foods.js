@@ -1,7 +1,7 @@
 import getInitialState from "../getInitialState"
 
 export const INITIAL_STATE = getInitialState()["foods"] || {
-	activeIndex: null,
+	activeIndex: 0,
 	list: ["apple", "orange", "banana"]
 };
 

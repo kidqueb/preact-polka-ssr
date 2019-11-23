@@ -17,7 +17,7 @@ export default ({ app, assets, initialProps, initialState }) => `
     </script>
 
     ${assets['vendor.js'] ? `<script src=${assets['vendor.js']} defer></script>` : ''}
-    <script src=${assets['app.js']} defer></script>
+    <script src=${assets['client.js']} defer></script>
   </body>
   </html>
 `;

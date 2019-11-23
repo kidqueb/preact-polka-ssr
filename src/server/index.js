@@ -9,7 +9,7 @@ import renderToString from "preact-render-to-string";
 import createStore from "../store"
 import asyncPrep from "./lib/asyncPrep";
 import renderDocument from "./lib/renderDocument";
-import App from "../app/components/App";
+import App from "../client/components/App";
 
 const isDev = process.env.NODE_ENV === "development";
 
