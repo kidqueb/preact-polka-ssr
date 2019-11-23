@@ -1,6 +1,11 @@
-import getInitialState from "../getInitialState"
+import getInitialState from "../_getInitialState"
+import bindContainer from "../_bindContainer"
 
-export const INITIAL_STATE = getInitialState()["foods"] || {
+/**
+ * Get the initial state from server data if present, otherwhite
+ * initialize a new store object with unmodified default state.
+ */
+export const initialState = getInitialState()["foods"] || {
 	activeIndex: 0,
 	list: ["apple", "orange", "banana"]
 };
@@ -11,18 +16,17 @@ export const FoodsActions = {
 };
 
 export default store => {
+	const onContainer = bindContainer("foods", store)
+
 	store.on("@init", () => {
-		const foods = INITIAL_STATE;
-		return { foods };
+		return { foods: initialState }
 	});
 
-	store.on(FoodsActions.SET_ACTIVE_INDEX, (store, activeIndex) => {
-		const foods = { ...store.foods, activeIndex };
-		return { foods };
+	onContainer(FoodsActions.SET_ACTIVE_INDEX, (state, activeIndex) => {
+		return { activeIndex };
 	});
 
-	store.on(FoodsActions.SET_LIST, (store, list) => {
-		const foods = { ...store.foods, list };
-		return { foods };
+	onContainer(FoodsActions.SET_LIST, (state, list) => {
+		return { list };
 	});
 };

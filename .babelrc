@@ -3,10 +3,14 @@
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-modules-commonjs",
     "@babel/plugin-transform-object-assign",
+    "@babel/plugin-proposal-optional-chaining",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-react-constant-elements",
     ["module:fast-async", { "spec": true }],
-    ["@babel/plugin-transform-react-jsx", { "pragma": "h", "pragmaFrag": "Fragment" }]
+    ["@babel/plugin-transform-react-jsx", { 
+      "pragma": "h", 
+      "pragmaFrag": "Fragment" 
+    }]
   ],
   "presets": [
     ["@babel/preset-env", {

@@ -28,7 +28,7 @@
     "lint": "eslint src/client"
   },
   "dependencies": {
-    "compression": "^1.7.3",
+    "compression": "^1.7.4",
     "devalue": "^1.1.0",
     "polka": "^1.0.0-next.7",
     "preact": "^10.0.0-beta.0",
@@ -42,6 +42,7 @@
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/plugin-transform-object-assign": "^7.2.0",

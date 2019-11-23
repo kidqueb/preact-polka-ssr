@@ -7,6 +7,7 @@ const getFoods = () =>
 	import(
 		"./client/pages/Foods"
 		/* webpackChunkName: "foods" */
+		/* webpackPrefetch: true */
 	);
 const getSports = () =>
 	import(

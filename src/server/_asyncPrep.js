@@ -1,4 +1,4 @@
-import getCurrentRoute from "./getCurrentRoute"
+import getCurrentRoute from "./_getCurrentRoute"
 
 /**
  * If we are dealing with an async route we need to first load it in.

@@ -4,7 +4,7 @@ import useStoreon from "storeon/preact"
 
 const Foods = ({ title }) => {
   const [clicks, setClicks] = useState(0)
-  const { dispatch, foods } = useStoreon('foods')
+  const { dispatch, foods = [] } = useStoreon('foods')
 
   return (
     <div>

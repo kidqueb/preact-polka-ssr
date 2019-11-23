@@ -1,10 +1,15 @@
 import createStore from "storeon";
+
 import foods from "./containers/foods";
 
+// Initialize devtools only if it's in the browser and in dev.
 const devTools =
-	(process.env.NODE_ENV === "development" && typeof window !== "undefined") &&
+	typeof window !== "undefined" &&
+	process.env.NODE_ENV === "development" &&
 	require("storeon/devtools");
 
-const store = () => createStore([foods, devTools]);
-
-export default store;
+// Export a function that creates a fresh new store object.
+export default () => createStore([
+	foods, 
+	devTools // dev only
+]);
