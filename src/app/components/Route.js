@@ -38,11 +38,9 @@ export default ({ path, match, store, component, getComponent }) => {
 		// use the `initialProps` set by the server.
 		if (c.getInitialProps) {
 			if (typeof window !== "undefined" && window.__SSR_DATA__) {
-				console.log("CACHED")
 				iP = window.__SSR_DATA__.initialProps
 				window.__SSR_DATA__ = null
 			} else {
-				console.log("FRESH")
 				iP = await c.getInitialProps({ params, store });
 			}
 		}
