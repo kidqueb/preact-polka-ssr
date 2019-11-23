@@ -9,9 +9,7 @@ export default ({ hook, store, children }) => (
 		<Router hook={hook}>
 			<div id="app">
 				<Header />
-				<div>
-					{children}
-				</div>
+				{children}
 			</div>
 		</Router>
 	</Provider>
