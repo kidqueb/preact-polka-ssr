@@ -10,7 +10,7 @@ import Route from "./components/Route";
 import createStore from "../store"
 
 // Hydrate the app
-if (typeof window !== undefined) {
+if (typeof window !== "undefined") {
 	const container = document.body;
 	const store = createStore()
 

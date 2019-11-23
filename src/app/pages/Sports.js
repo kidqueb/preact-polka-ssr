@@ -23,7 +23,9 @@ const Sports = ({ req, params }) => {
       <Link href="asd">asd</Link>
       
 			<NestedRouter base="/sports" req={req}>
-				<SportsNested path="/asd/:what?" />
+				<SportsNested path="/asd/:what" />
+				<SportsNested path="/asd/:huh" />
+				<SportsNested path="/asd/:ok" />
 			</NestedRouter>
 		</div>
 	);

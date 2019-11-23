@@ -2,9 +2,9 @@ import createStore from "storeon";
 import foods from "./containers/foods";
 
 const devTools =
-	(process.env.NODE_ENV === "development" && typeof window !== undefined) &&
+	(process.env.NODE_ENV === "development" && typeof window !== "undefined") &&
 	require("storeon/devtools");
 
-const store = () => createStore([foods]);
+const store = () => createStore([foods, devTools]);
 
 export default store;

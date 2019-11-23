@@ -40,7 +40,12 @@ const server = polka()
 				const app = renderToString(<AppWithCurrentRoute />);
 
 				// Render our html template
-				const html = renderDocument({ app, assets, params, initialProps });
+				const html = renderDocument({ 
+					app, 
+					assets, 
+					initialProps,
+					initialState: store.get()
+				});
 
 				res.end(html);
 			})
