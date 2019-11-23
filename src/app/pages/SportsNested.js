@@ -1,10 +1,11 @@
 import { h } from "preact";
 
-export default ({ what }) => {
+export default ({ what, huh, ok }) => {
 	return (
 		<div>
 			<hr />
-			<p>Some Nested Stuff. {what}</p>
+			<p>Some Nested Stuff.</p>
+			<p>what: {what}</p>
 		</div>
 	);
 };
