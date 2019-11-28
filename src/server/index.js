@@ -18,7 +18,6 @@ const isDev = process.env.NODE_ENV === "development";
 const server = polka()
 	.use(sirv("dist"))
 	.get("*", (req, res, next) => {
-		const assets = JSON.parse(fs.readFileSync("./dist/manifest.json", "utf8"));
 		const store = createStore()
 
 		// Wait for `loadInitialProps` and `ensureReady` to resolve,
@@ -35,11 +34,10 @@ const server = polka()
 					</App>
 				);
 
-				// Render the html document with our rendered app, asset manifest,
-				// initialProps and the store's current state to hydrate the client.
+				// Render the html document with our rendered app, initialProps 
+				// and the store's current state to hydrate the client.
 				const html = renderDocument({ 
 					app, 
-					assets, 
 					initialProps,
 					initialState: store.get()
 				});

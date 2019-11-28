@@ -1,9 +1,11 @@
 import devalue from 'devalue';
 
+const assets = JSON.parse(fs.readFileSync("./dist/manifest.json", "utf8"));
+
 /*
  * The main document we render our app into.
  */
-export default ({ app, assets, initialProps, initialState }) => `
+export default ({ app, initialProps, initialState }) => `
   <!doctype html>
   <html lang="en">
   <head>
