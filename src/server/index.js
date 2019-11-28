@@ -1,5 +1,4 @@
 import { h } from "preact";
-import fs from "fs";
 import polka from "polka";
 import sirv from "sirv";
 import useStaticLocation from "wouter-preact/static-location";

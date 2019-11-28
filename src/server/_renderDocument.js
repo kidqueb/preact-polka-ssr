@@ -1,3 +1,4 @@
+import fs from "fs";
 import devalue from 'devalue';
 
 const assets = JSON.parse(fs.readFileSync("./dist/manifest.json", "utf8"));
@@ -27,8 +28,8 @@ export default ({ app, initialProps, initialState }) => `
       window.__SSR_DATA__ = ${devalue({ initialProps, initialState })}
     </script>
 
-    ${assets['vendor.js'] ? `<script src=${assets['vendor.js']} defer></script>` : ''}
-    <script src=${assets['client.js']} defer></script>
+    <script src=${assets['vendor.js']}></script>
+    <script src=${assets['client.js']}></script>
   </body>
   </html>
 `;
