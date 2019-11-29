@@ -3,7 +3,7 @@
  * having to spread the previous state on the container's key we just bind
  * the actions to the container.
  * 
- * Why we use `bindContainer` to return data in our actions:
+ * How `bindContainer` can clean up our action's code:
  * Before: return { containerKey: { ...state.containerKey, newState } }
  * After:  return { newState }
  */
