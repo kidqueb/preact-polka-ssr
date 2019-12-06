@@ -1,25 +1,9 @@
-/* eslint-disable lines-around-comment */
-
 /**
  * Async route functions
  */
-const getFoods = () =>
-	import(
-		"./client/pages/Foods"
-		/* webpackChunkName: "foods" */
-		/* webpackPrefetch: true */
-	);
-const getSports = () =>
-	import(
-		"./client/pages/Sports"
-		/* webpackChunkName: "sports" */
-		/* webpackPrefetch: true */
-	);
-const getError = () =>
-	import(
-		"./client/pages/Error"
-		/* webpackChunkName: "error" */
-	);
+const getFoods = () => import("./client/pages/Foods"/* webpackChunkName: "foods" */);
+const getSports = () => import("./client/pages/Sports"/* webpackChunkName: "sports" */);
+const getError = () => import("./client/pages/Error"/* webpackChunkName: "error" */);
 
 /**
  * Route tree
