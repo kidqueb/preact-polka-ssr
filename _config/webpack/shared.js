@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     alias: {
       '~': path.join(__dirname, '../../src'),
-      components: path.join(__dirname, '../../src/app/components')
+      components: path.join(__dirname, '../../src/client/components')
     }
   },
   module: {

@@ -1,10 +1,10 @@
-const webpack = require('webpack')
 const merge = require('webpack-merge')
+const TerserPlugin = require("terser-webpack-plugin");
 const base = require('./base.js')
 
 module.exports = merge(base, {
   mode: 'production',
-  plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
-  ]
+  optimization: {
+		minimizer: [new TerserPlugin()]
+	}
 });

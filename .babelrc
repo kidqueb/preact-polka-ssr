@@ -1,19 +1,25 @@
 {
   "plugins": [
-    "@babel/plugin-proposal-class-properties",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-object-assign",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-react-constant-elements",
-    ["@babel/plugin-transform-react-jsx", { "pragma": "h" }]
+    ["module:fast-async", { "spec": true }],
+    ["@babel/plugin-transform-react-jsx", { 
+      "pragma": "h", 
+      "pragmaFrag": "Fragment" 
+    }]
   ],
   "presets": [
     ["@babel/preset-env", {
-      "useBuiltIns": "usage",
-      "corejs": "3.0.0",
       "targets": {
         "node": "current",
-        "esmodules": true
-      }
+        "esmodules": true,
+        "browsers": "last 2 version, > 1%, not dead"
+      },
+      "exclude": ["@babel/plugin-proposal-async-generator-functions"]
     }]
   ],
   "env": {
