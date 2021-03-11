@@ -1,5 +1,7 @@
 # Preact/Polka SSR
-Major work in progress. Definitely hit me up on [twitter (@kidqueb)](https://twitter.com/kidqueb) if you have any suggestions or questions.
+
+NOT MAINTAINED. Use it for reference if you'd like, but I'd personally just look into running Nextjs with Preact.
+
 
 ## Implemented
 * Isomorphic `preact` app served by `polka`.
